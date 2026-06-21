@@ -8,23 +8,22 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _lookAction;
     private InputAction _jumpAction;
+    private InputAction _attackAction;
     private InputAction _pauseActionPlayer;
     private InputAction _pauseActionUI;
     private InputAction _interactAction;
     private InputAction _exitInteractionAction;
-    private InputAction _attackAction;
     private InputAction _inventoryActionPlayer;
     private InputAction _inventoryActionUI;
 
     public Vector2 MoveInput { get; private set; }
-    public Vector2 LookInput { get; private set; }
+    public bool AttackTriggered { get; private set; }
     public bool JumpTriggered { get; private set; }
     public bool InteractTriggered { get; private set; }
     public bool ExitInteractionTriggered { get; private set; }
     public bool PauseTriggeredPlayer { get; private set; }
     public bool PauseTriggeredUI { get; private set; }
     public int HotbarKeyPressed { get; private set; } = -1;
-    public bool AttackTriggered { get; private set; }
     public bool InventoryTriggeredPlayer { get; private set; }
     public bool InventoryTriggeredUI { get; private set; }
 
@@ -38,9 +37,8 @@ public class PlayerInputHandler : MonoBehaviour
         var playerMap = _inputAsset.FindActionMap("Player");
         _moveAction = playerMap.FindAction("Move");
         _jumpAction = playerMap.FindAction("Jump");
+        _attackAction = playerMap.FindAction("Attack");
         // _pauseActionPlayer = playerMap.FindAction("Pause");
-        _lookAction = playerMap.FindAction("Look");
-        // _attackAction = playerMap.FindAction("Attack");
         // _inventoryActionPlayer = playerMap.FindAction("Inventory");
 
         // var uiMap = _inputAsset.FindActionMap("UI");
@@ -55,13 +53,12 @@ public class PlayerInputHandler : MonoBehaviour
     void Update()
     {
         MoveInput = _moveAction.ReadValue<Vector2>();
-        LookInput = _lookAction.ReadValue<Vector2>();
         JumpTriggered = _jumpAction.WasPressedThisFrame();
+        AttackTriggered = _attackAction.WasPressedThisFrame();
         // PauseTriggeredPlayer = _pauseActionPlayer.WasPressedThisFrame();
         // PauseTriggeredUI = _pauseActionUI.WasPressedThisFrame();
         // InteractTriggered = _interactAction.WasPressedThisFrame();
         // ExitInteractionTriggered = _exitInteractionAction.WasPressedThisFrame();
-        // AttackTriggered = _attackAction.WasPressedThisFrame();
         // InventoryTriggeredPlayer = _inventoryActionPlayer.WasPressedThisFrame();
         // InventoryTriggeredUI = _inventoryActionUI.WasPressedThisFrame();
 

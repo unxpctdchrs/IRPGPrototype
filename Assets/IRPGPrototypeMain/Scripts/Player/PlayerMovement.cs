@@ -4,14 +4,15 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private bool _enableJump = false;
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
 
     [Header("Camera Settings")]
-    [Tooltip("The main camera so the player moves relative to where the camera is looking.")]
     [SerializeField] private Transform _mainCameraTransform;
 
+    private Animator _playerModelAnimator;
     private Rigidbody _rigidbody;
     private PlayerInputHandler _playerInputHandler;
     private bool _isPlayerFrozen = false;
@@ -23,16 +24,19 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
-        // Auto-assign the main camera if one isn't dragged into the inspector
         if (_mainCameraTransform == null && Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
         }
+
+        _playerModelAnimator = GetComponentInChildren<Animator>();
+        if (_playerModelAnimator != null) Debug.Log("Captured Model Animator");
+        else Debug.Log("There is no Animator attached to this Model");
     }
 
     void Update()
     {   
-        Jump();
+        if (_enableJump) Jump();
         Debug.DrawRay(transform.position, transform.forward * 2, Color.purple);
     }
 
@@ -45,23 +49,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isPlayerFrozen) return;
 
-        // Capture raw input
+        _playerModelAnimator.SetBool("isMoving", false);
         Vector3 inputDirection = new Vector3(_playerInputHandler.MoveInput.x, 0f, _playerInputHandler.MoveInput.y).normalized;
 
-        // Only move and rotate if there is input
         if (inputDirection.magnitude >= 0.1f)
         {
-            // Calculate the target angle based on input and camera rotation
+            _playerModelAnimator.SetBool("isMoving", true);
             float targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCameraTransform.eulerAngles.y;
-
-            // Smoothly rotate the character model to face the movement direction
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
             _rigidbody.MoveRotation(Quaternion.Euler(0f, angle, 0f));
 
-            // Calculate the actual movement direction relative to the camera
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            // Apply movement
             _rigidbody.MovePosition(_rigidbody.position + moveDir.normalized * _walkSpeed * Time.fixedDeltaTime);
         }
     }
@@ -77,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         float rayLength = 1.5f;
-        // Added a slight upward offset so the raycast doesn't start exactly at floor level
         return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength, _groundLayer);
     }
 
