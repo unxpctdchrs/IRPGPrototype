@@ -9,19 +9,19 @@ EditorBuildSettings:
     path: Assets/IRPGPrototypeMain/Scenes/Debug/DebugScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/IRPGPrototypeMain/Scenes/BaseScene.unity
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/BaseScene.unity
     guid: c17140430b7b64760abde96914188eae
   - enabled: 1
-    path: Assets/IRPGPrototypeMain/Scenes/MainMenuScene.unity
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/MainMenuScene.unity
     guid: 0ce26d07e7d6b4db789bf768fbcd285b
   - enabled: 1
-    path: Assets/IRPGPrototypeMain/Scenes/BattleScene.unity
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/BattleScene.unity
     guid: 13141e4ae56b74c579b9a8e2be0ec6b4
   - enabled: 1
-    path: Assets/IRPGPrototypeMain/Scenes/ShedScene.unity
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/ShedScene.unity
     guid: f7c60f2ee94ec4d4e9e4b96c878632a9
   - enabled: 1
-    path: Assets/IRPGPrototypeMain/Scenes/WorldScene.unity
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/WorldScene.unity
     guid: 798e470c35e80463ab39cb8827e918e3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

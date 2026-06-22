@@ -5,10 +5,8 @@ using Zenject;
 public class BattleSetup : MonoBehaviour
 {
     [Header("Battle Area Slots")]
-    [Tooltip("Drag EnemySlot1 through EnemySlot4 here in order")]
     [SerializeField] private List<Transform> _enemySlots;
 
-    // You can uncomment this later when we set up your party members!
     // [SerializeField] private List<Transform> _characterSlots;
 
     private ScenePayload _payload;
@@ -28,7 +26,7 @@ public class BattleSetup : MonoBehaviour
     {
         if (_payload.BattleEnemies == null || _payload.BattleEnemies.Count == 0)
         {
-            Debug.LogWarning("[BattleSetupManager] No enemies found in payload! (Did you load this scene directly?)");
+            Debug.LogWarning("[BattleSetupManager] No enemies found in payload");
             return;
         }
 
@@ -36,7 +34,7 @@ public class BattleSetup : MonoBehaviour
         {
             if (i >= _enemySlots.Count)
             {
-                Debug.LogWarning($"[BattleSetupManager] Too many enemies! Only {_enemySlots.Count} slots available. Skipping the rest.");
+                Debug.LogWarning($"[BattleSetupManager] Too many enemies, Only {_enemySlots.Count} slots available. Skipping the rest.");
                 break;
             }
 
