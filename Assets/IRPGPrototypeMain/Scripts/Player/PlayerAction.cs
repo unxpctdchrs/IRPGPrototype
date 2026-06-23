@@ -4,6 +4,7 @@ using Zenject;
 public class PlayerAction : MonoBehaviour
 {
     [SerializeField] private Transform _playerRightHand;
+    [SerializeField] private bool _enableAttack = false;
     private Transform _meleeModel;
     private MeleeWeaponHitbox _weaponHitbox;
     private PlayerInputHandler _playerInputHandler;
@@ -34,7 +35,7 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        CheckOnAttack();
+        if (_enableAttack) CheckOnAttack();
     }
 
     private void CheckOnAttack()
@@ -60,7 +61,7 @@ public class PlayerAction : MonoBehaviour
             {
                 Debug.Log($"PlayerAction confirms hit on: {hitEnemyCollider.gameObject.name}");
 
-                if (hitEnemyCollider.TryGetComponent<EnemyBackpack>(out EnemyBackpack enemyBackpack))
+                if (hitEnemyCollider.TryGetComponent(out EnemyBackpack enemyBackpack))
                 {
                     _payload.Clear();
                     _payload.BattleEnemies = enemyBackpack.EncounterProfile.ChildEnemy; 

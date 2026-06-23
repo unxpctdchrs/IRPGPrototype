@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 3109901823501238162}
   - component: {fileID: 6632827337100883173}
   - component: {fileID: 5411970081528284419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Worn Door_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

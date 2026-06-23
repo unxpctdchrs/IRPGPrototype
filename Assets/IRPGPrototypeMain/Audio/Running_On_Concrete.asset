@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-9039836516376817517
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_03_{-9039836516376817517}
+  m_AudioClip: {fileID: 8300000, guid: 50df1a3cb5cae4a92a5dab22c6929f0c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8421154499770384870
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_05_{-8421154499770384870}
+  m_AudioClip: {fileID: 8300000, guid: 92ac3e1c8edf74f7c8376c813b6fcecb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4535787426394047436
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_09_{-4535787426394047436}
+  m_AudioClip: {fileID: 8300000, guid: 331ea3efe02234078a8a6670d1a4c039, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2605225518404565818
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_02_{-2605225518404565818}
+  m_AudioClip: {fileID: 8300000, guid: 964fee5ef3b0142caa909fd534cf608b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1507780690181807898
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_06_{-1507780690181807898}
+  m_AudioClip: {fileID: 8300000, guid: 633c116735b3f44dcbec6bfdb7f88ba8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1116996691808106647
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_01_{-1116996691808106647}
+  m_AudioClip: {fileID: 8300000, guid: 98f3c0307ccd3457b993fa2bb5b80d20, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1044463345111606550
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_04_{-1044463345111606550}
+  m_AudioClip: {fileID: 8300000, guid: 9cc95284177804d379dd83e06bfda7c5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1711496119170400846
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_08_{1711496119170400846}
+  m_AudioClip: {fileID: 8300000, guid: 6a59dfd2d98de45538a8e67fdfabe21d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3540652066762684010
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_10_{3540652066762684010}
+  m_AudioClip: {fileID: 8300000, guid: 3372cb2e856034d1eb4d6c7619916e44, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Running_On_Concrete
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -1.1428595, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -1116996691808106647}
+  - {fileID: -2605225518404565818}
+  - {fileID: -9039836516376817517}
+  - {fileID: -1044463345111606550}
+  - {fileID: -8421154499770384870}
+  - {fileID: -1507780690181807898}
+  - {fileID: 8506254159287262530}
+  - {fileID: 1711496119170400846}
+  - {fileID: -4535787426394047436}
+  - {fileID: 3540652066762684010}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8506254159287262530
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps_Rock_Run_07_{8506254159287262530}
+  m_AudioClip: {fileID: 8300000, guid: cb965ac721dae459486a7e53a1080741, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

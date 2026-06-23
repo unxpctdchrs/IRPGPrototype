@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb9486986a294cb49d9e586b4964cb9, type: 3}
+  m_Name: KuntilanakET
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyToSpawn
+  EnemyModelRepresentation: {fileID: 6196575994408425402, guid: e6254d6d6549f49b39c8716a270439a6, type: 3}
+  ChildEnemy: []

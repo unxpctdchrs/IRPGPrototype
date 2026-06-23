@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemyToSpawn _prefabToSpawn;
+    [SerializeField] private List<EnemyToSpawn> _enemiesToSpawn;
     [SerializeField] private int _amountToSpawn = 17;
     [SerializeField] private List<Collider> _spawnAreas;
     [SerializeField] private float _heightOffset = 1.0f;
@@ -16,9 +16,9 @@ public class EnemySpawner : MonoBehaviour
     [ContextMenu("TEST: Spawn Enemy")]
     public void SpawnEnemies()
     {
-        if (_prefabToSpawn == null || _spawnAreas == null || _spawnAreas.Count == 0) 
+        if (_enemiesToSpawn == null || _enemiesToSpawn.Count == 0 || _spawnAreas == null || _spawnAreas.Count == 0) 
         {
-            Debug.LogWarning("[EnemySpawner] Missing Prefab or Spawn Areas in the Inspector!");
+            Debug.LogWarning("[EnemySpawner] Missing Prefabs or Spawn Areas in the Inspector!");
             return;
         }
 
@@ -32,15 +32,17 @@ public class EnemySpawner : MonoBehaviour
             float spawnY = bounds.max.y + _heightOffset;
 
             Vector3 randomPosition = new Vector3(randomX, spawnY, randomZ);
-            GameObject spawnedObj = Instantiate(_prefabToSpawn.EnemyModelRepresentation, randomPosition, Quaternion.identity, this.transform);
+            EnemyToSpawn selectedEnemyProfile = _enemiesToSpawn[Random.Range(0, _enemiesToSpawn.Count)];
 
-            if (spawnedObj.TryGetComponent<EnemyBackpack>(out EnemyBackpack enemyBrain))
+            GameObject spawnedObj = Instantiate(selectedEnemyProfile.EnemyModelRepresentation, randomPosition, Quaternion.identity, this.transform);
+
+            if (spawnedObj.TryGetComponent(out EnemyBackpack enemyBackpack))
             {
-                enemyBrain.Initialize(_prefabToSpawn);
+                enemyBackpack.Initialize(selectedEnemyProfile);
             }
             else
             {
-                Debug.LogWarning($"[EnemySpawner] The prefab {_prefabToSpawn.name} is missing the EnemyBackpack script");
+                Debug.LogWarning($"[EnemySpawner] The prefab {selectedEnemyProfile.name} is missing the EnemyBackpack script");
             }
         }
     }

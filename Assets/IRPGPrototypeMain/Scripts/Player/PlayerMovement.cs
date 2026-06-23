@@ -1,4 +1,7 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
+using Zenject;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,11 +15,27 @@ public class PlayerMovement : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private Transform _mainCameraTransform;
 
+    [Header("Intro Cinematic Settings")]
+    [SerializeField] private Transform _cinematicTarget;
+    [SerializeField] private float _cinematicWalkSpeed = 3f;
+    [SerializeField] private bool _isGrounded = false;
+
     private Animator _playerModelAnimator;
     private Rigidbody _rigidbody;
     private PlayerInputHandler _playerInputHandler;
     private bool _isPlayerFrozen = false;
     private float _turnSmoothVelocity;
+    private float _distanceTraveled;
+    private float _stepDistanceToPlaySound = 3.0f;
+
+    private AudioManager _audioManager;
+    private AudioLibrary _audioLibrary;
+    [Inject]
+    public void Construct(AudioManager audioManager, AudioLibrary audioLibrary)
+    {
+        _audioManager = audioManager;
+        _audioLibrary = audioLibrary;
+    }
 
     void Start()
     {
@@ -38,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {   
         if (_enableJump) Jump();
         Debug.DrawRay(transform.position, transform.forward * 2, Color.purple);
+        HandleFootsteps();
     }
 
     void FixedUpdate()
@@ -76,7 +96,9 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         float rayLength = 1.5f;
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength, _groundLayer);
+        bool iG = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength, _groundLayer);
+        _isGrounded = iG;
+        return iG;
     }
 
     public void MovePlayer(Vector3 position)
@@ -90,4 +112,60 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public bool IsPlayerFrozen() => _isPlayerFrozen;
+
+    public void WalkToCinematicMark()
+    {
+        StartCoroutine(IntroWalkRoutine());
+    }
+
+    private IEnumerator IntroWalkRoutine()
+    {
+        FreezePlayer(true);
+        _playerModelAnimator.SetBool("isMoving", true);
+
+        while (true)
+        {
+            Vector3 flatTarget = new Vector3(_cinematicTarget.position.x, transform.position.y, _cinematicTarget.position.z);
+            
+            if (Vector3.Distance(transform.position, flatTarget) <= 0.1f)
+            {
+                break; 
+            }
+
+            Vector3 newPos = Vector3.MoveTowards(transform.position, flatTarget, _cinematicWalkSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(newPos);
+
+            Vector3 direction = (flatTarget - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+        _playerModelAnimator.SetBool("isMoving", false);
+    }
+
+    private void HandleFootsteps()
+    {
+        bool isWalkingManually = !_isPlayerFrozen && _playerInputHandler.MoveInput.magnitude > 0.1f;
+        bool isWalkingCinematically = _isPlayerFrozen && _playerModelAnimator.GetBool("isMoving");
+
+        if (IsGrounded() && (isWalkingManually || isWalkingCinematically))
+        {
+            float activeSpeed = isWalkingCinematically ? _cinematicWalkSpeed : _walkSpeed;
+            
+            _distanceTraveled += activeSpeed * Time.deltaTime;
+
+            if (_distanceTraveled >= _stepDistanceToPlaySound)
+            {
+                if (_audioLibrary != null) 
+                {
+                    _audioManager.PlaySFXAtPosition(_audioLibrary.StepConcrete, transform.position);
+                }
+                _distanceTraveled = 0f;
+            }
+        }
+    }
 }
