@@ -22,4 +22,9 @@ public class KuntilanakBattleController : MonoBehaviour, IBattler
 
         controller.EndCurrentTurn(); 
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        throw new System.NotImplementedException();
+    }
 }

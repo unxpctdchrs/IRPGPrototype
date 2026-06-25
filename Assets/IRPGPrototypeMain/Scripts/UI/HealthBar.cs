@@ -17,11 +17,16 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         if (_healthBarSlider.value != _currentHealth) _healthBarSlider.value = _currentHealth;
-        if(_healthBarSlider.value != _lerpBarSlider.value) _lerpBarSlider.value = Mathf.Lerp(_lerpBarSlider.value, _currentHealth, _lerpSpeed);
+        if (_healthBarSlider.value != _lerpBarSlider.value) _lerpBarSlider.value = Mathf.Lerp(_lerpBarSlider.value, _currentHealth, _lerpSpeed);
     }
 
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
+    }
+
+    public void SetupHealthBar(float _normalValue)
+    {
+        _currentHealth = _normalValue;
     }
 }

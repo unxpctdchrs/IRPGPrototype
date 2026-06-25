@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private BattleUIManager _battleUIManager;
     [SerializeField] private TargetSelector _targetSelector;
+    [SerializeField] private float _turnDelay = 0.5f;
     private BattleSetup _battleSetup;
     private List<IBattler> _turnQueue = new List<IBattler>();
     private int _currentTurnIndex = 0;
@@ -58,6 +60,12 @@ public class BattleController : MonoBehaviour
 
     public void ReportTurnFinished()
     {
+        StartCoroutine(TurnBreatherRoutine());
+    }
+
+    private IEnumerator TurnBreatherRoutine()
+    {
+        yield return new WaitForSeconds(_turnDelay);        
         EndCurrentTurn();
     }
 
@@ -68,12 +76,8 @@ public class BattleController : MonoBehaviour
         
         if (activePlayer != null)
         {
-            activePlayer.PlayAttackAnimation();
+            activePlayer.PlayAttackAnimation(target);
         }
-        
-        // TODO: Trigger the Player's attack animation
-        // TODO: Fire your Cinemachine camera shake!
-        // TODO: Calculate damage and subtract from the target's HP
     }
 
     public IBattler GetRandomPlayerTarget()

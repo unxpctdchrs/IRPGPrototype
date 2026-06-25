@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyToSpawn
   EnemyModelRepresentation: {fileID: 2422581461021273357, guid: 023677b04240f4078aec542bf1d8ad71, type: 3}
   ChildEnemy:
-  - {fileID: 7239925662537598651, guid: 89c6604e220714fb3862aa8cbb075191, type: 3}
-  - {fileID: 7239925662537598651, guid: 89c6604e220714fb3862aa8cbb075191, type: 3}
+  - {fileID: 4123898435563009422, guid: ecccd4f0b5a304fdf9c6c128ba884a08, type: 3}
+  - {fileID: 4123898435563009422, guid: ecccd4f0b5a304fdf9c6c128ba884a08, type: 3}

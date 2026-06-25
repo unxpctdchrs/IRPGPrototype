@@ -4,6 +4,9 @@ using Zenject;
 
 public class BattleSetup : MonoBehaviour
 {
+    [Header("Setup")]
+    [SerializeField] private BattleUIManager _battleUIManager;
+
     [Header("Battle Area Slots")]
     [SerializeField] private List<Transform> _enemySlots;
     [SerializeField] private List<Transform> _characterSlots;
@@ -23,6 +26,7 @@ public class BattleSetup : MonoBehaviour
 
     private void Start()
     {
+        if (_battleUIManager == null) _battleUIManager = FindAnyObjectByType<BattleUIManager>();
         SpawnEnemiesAndPartyFromPayload();
     }
 
@@ -73,6 +77,13 @@ public class BattleSetup : MonoBehaviour
                 if (spawnedParty.TryGetComponent(out IBattler battlerComponent))
                 {
                     _activeParty.Add(battlerComponent);
+                }
+
+                HealthBar linkedHealthBar = _battleUIManager.SpawnCharacterInfoUI(characterData);
+                
+                if (spawnedParty.TryGetComponent(out IPartyMember partyMember))
+                {
+                    partyMember.SetupPartyMember(characterData, linkedHealthBar);
                 }
             }
         }
