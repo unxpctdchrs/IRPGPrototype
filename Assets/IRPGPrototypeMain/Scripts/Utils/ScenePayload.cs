@@ -11,16 +11,15 @@ public class ScenePayload
 {
     public EnvironmentType TargetEnvironment { get; set; }    
     public SceneType DestinationScene { get; set; }
-    public List<GameObject> BattleEnemies { get; set; } 
+    public List<GameObject> BattleEnemies { get; set; }
+    public List<CharacterData> CurrentParty { get; set; }
 
     public void Clear()
     {
         TargetEnvironment = EnvironmentType.Normal;
         DestinationScene = SceneType.MainMenuScene; 
         
-        if (BattleEnemies != null)
-        {
-            BattleEnemies.Clear();
-        }
+        if (BattleEnemies != null) BattleEnemies.Clear();
+        if (CurrentParty != null) CurrentParty.Clear();
     }
 }

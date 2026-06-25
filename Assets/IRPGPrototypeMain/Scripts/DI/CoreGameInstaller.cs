@@ -1,20 +1,34 @@
-using Zenject;
 using UnityEngine;
+using Zenject;
 
 public class CoreGameInstaller : MonoInstaller
 {
     [SerializeField] private CoroutineRunner _coroutineRunner;
-    [SerializeField] private GameObject _audioManagerPrefab;
+    [SerializeField] private GameObject _audioManager;
     [SerializeField] private AudioLibrary _mainAudioLibrary;
+    [SerializeField] private PartyManager _partyManager;
+    [SerializeField] private InputManager _inputManager;
+
     public override void InstallBindings()
     {
         Container.Bind<ISceneService>().To<SceneService>().AsSingle();
         Container.Bind<CoroutineRunner>().FromInstance(_coroutineRunner).AsSingle();
         Container.Bind<ScenePayload>().AsSingle();
+        Container.BindInstance(_mainAudioLibrary).AsSingle();
+
         Container.BindInterfacesAndSelfTo<AudioManager>()
-            .FromComponentInNewPrefab(_audioManagerPrefab)
+            .FromComponentInNewPrefab(_audioManager)
             .AsSingle()
             .NonLazy();
-        Container.BindInstance(_mainAudioLibrary).AsSingle();
+
+        Container.Bind<PartyManager>()
+            .FromComponentInNewPrefab(_partyManager)
+            .AsSingle()
+            .NonLazy();
+
+        Container.Bind<InputManager>()
+            .FromComponentInNewPrefab(_inputManager)
+            .AsSingle()
+            .NonLazy();
     }
 }

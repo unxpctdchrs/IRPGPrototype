@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,48 +8,60 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private bool _enableAttack = false;
     private Transform _meleeModel;
     private MeleeWeaponHitbox _weaponHitbox;
-    private PlayerInputHandler _playerInputHandler;
     private Animator _playerModelAnimator;
 
     private ISceneService _sceneService;
     private ScenePayload _payload;
+    private PartyManager _partyManager;
+    private InputManager _inputManager;
 
     [Inject]
-    public void Construct(ISceneService sceneService, ScenePayload payload)
+    public void Construct(ISceneService sceneService, ScenePayload payload, PartyManager partyManager, InputManager inputManager)
     {
         _sceneService = sceneService;
         _payload = payload;
+        _partyManager = partyManager;
+        _inputManager = inputManager;
     }
 
     void Start()
     {
-        _playerInputHandler = GetComponent<PlayerInputHandler>();
         _playerModelAnimator = GetComponentInChildren<Animator>();
 
         if (_playerRightHand != null && _playerRightHand.childCount > 0)
         {
             _meleeModel = _playerRightHand.transform.GetChild(0);
             _weaponHitbox = _meleeModel.GetComponent<MeleeWeaponHitbox>();
-            Debug.Log("Melee model found");
+            Debug.Log("[PlayerAction] Melee model found");
         }
     }
 
-    void Update()
+    void OnEnable()
     {
-        if (_enableAttack) CheckOnAttack();
+        if (_inputManager != null)
+        {
+            _inputManager.OnAttack += CheckOnAttack;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (_inputManager != null)
+        {
+            _inputManager.OnAttack -= CheckOnAttack;
+        }
     }
 
     private void CheckOnAttack()
     {
-        if (_playerInputHandler.AttackTriggered)
-        {
-            if (_weaponHitbox != null)
-            {
-                _weaponHitbox.ResetHitbox();
-            }
+        if (!_enableAttack) return;
 
-            _playerModelAnimator.SetTrigger("isAttacking");
+        if (_weaponHitbox != null)
+        {
+            _weaponHitbox.ResetHitbox();
         }
+
+        _playerModelAnimator.SetTrigger("isAttacking");
     }
 
     public void ExecuteMeleeHit()
@@ -59,12 +72,13 @@ public class PlayerAction : MonoBehaviour
             
             if (hitEnemyCollider != null) 
             {
-                Debug.Log($"PlayerAction confirms hit on: {hitEnemyCollider.gameObject.name}");
+                Debug.Log($"]PlayerAction] hit on: {hitEnemyCollider.gameObject.name}");
 
                 if (hitEnemyCollider.TryGetComponent(out EnemyBackpack enemyBackpack))
                 {
                     _payload.Clear();
-                    _payload.BattleEnemies = enemyBackpack.EncounterProfile.ChildEnemy; 
+                    _payload.BattleEnemies = enemyBackpack.EncounterProfile.ChildEnemy;
+                    _payload.CurrentParty = new List<CharacterData>(_partyManager.UnlockedCharacters);
                     _sceneService.LoadScene(SceneType.BattleScene);
                 }
             }

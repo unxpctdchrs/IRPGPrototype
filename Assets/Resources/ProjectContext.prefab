@@ -76,8 +76,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoreGameInstaller
   _coroutineRunner: {fileID: 3438075467679595599}
-  _audioManagerPrefab: {fileID: 8435787936553040637, guid: 33aad5a25b19b4af9998616639b190ec, type: 3}
+  _audioManager: {fileID: 8435787936553040637, guid: 33aad5a25b19b4af9998616639b190ec, type: 3}
   _mainAudioLibrary: {fileID: 11400000, guid: 961d85fdded544b059939af1de7bf183, type: 2}
+  _partyManager: {fileID: 3120098303295651388, guid: 2463bb050952c4687bbaab4372148a79, type: 3}
+  _inputManager: {fileID: 2944765993971984947, guid: 9b4e6c82c82864187a02427ff6794d22, type: 3}
 --- !u!114 &3438075467679595599
 MonoBehaviour:
   m_ObjectHideFlags: 0

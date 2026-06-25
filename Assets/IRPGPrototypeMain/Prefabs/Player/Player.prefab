@@ -54,7 +54,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3700632040429648665
 Transform:
   m_ObjectHideFlags: 0
@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137803218509467980}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20374489, y: 0.00000029502797, z: -0.00000006322028, w: 0.97902405}
-  m_LocalPosition: {x: -0.000001549721, y: 3.35, z: -5.6400003}
+  m_LocalRotation: {x: 0.20347089, y: 0.000000022210793, z: -0.0000000046158077, w: 0.97908103}
+  m_LocalPosition: {x: 0.00000047683716, y: 3.35, z: -5.6399994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -147,8 +147,8 @@ MonoBehaviour:
     SplineCurvature: 0.301
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 0
-    Center: 90.00001
+    Value: -180
+    Center: -180
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
@@ -885,7 +885,6 @@ GameObject:
   - component: {fileID: 7292443655734932697}
   - component: {fileID: 6614040308158120195}
   - component: {fileID: 7142359258048804385}
-  - component: {fileID: 6282549804497810302}
   - component: {fileID: 5858694905576062543}
   - component: {fileID: 7951660693769479400}
   m_Layer: 0
@@ -1020,19 +1019,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6282549804497810302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3668731235193732387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6283a2825fee42579099ae6ddbbdf48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
-  _inputAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &5858694905576062543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,6 +1041,7 @@ MonoBehaviour:
   _mainCameraTransform: {fileID: 3700632040429648665}
   _cinematicTarget: {fileID: 0}
   _cinematicWalkSpeed: 3
+  _isGrounded: 0
 --- !u!114 &7951660693769479400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _playerRightHand: {fileID: 3524575733590633358}
-  _enableAttack: 0
+  _enableAttack: 1
 --- !u!1 &3694578369449548485
 GameObject:
   m_ObjectHideFlags: 0

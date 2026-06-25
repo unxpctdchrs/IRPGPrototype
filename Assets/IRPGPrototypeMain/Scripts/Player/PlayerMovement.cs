@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 using Zenject;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
+    private Vector2 _currentMoveInput;
 
     [Header("Camera Settings")]
     [SerializeField] private Transform _mainCameraTransform;
@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator _playerModelAnimator;
     private Rigidbody _rigidbody;
-    private PlayerInputHandler _playerInputHandler;
     private bool _isPlayerFrozen = false;
     private float _turnSmoothVelocity;
     private float _distanceTraveled;
@@ -30,16 +29,19 @@ public class PlayerMovement : MonoBehaviour
 
     private AudioManager _audioManager;
     private AudioLibrary _audioLibrary;
+    private InputManager _inputManager;
+
     [Inject]
-    public void Construct(AudioManager audioManager, AudioLibrary audioLibrary)
+    public void Construct(AudioManager audioManager, AudioLibrary audioLibrary, InputManager inputManager)
     {
         _audioManager = audioManager;
         _audioLibrary = audioLibrary;
+        _inputManager = inputManager;
     }
 
     void Start()
     {
-        _playerInputHandler = GetComponent<PlayerInputHandler>();
+        // _playerInputHandler = GetComponent<PlayerInputHandler>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -53,9 +55,26 @@ public class PlayerMovement : MonoBehaviour
         else Debug.Log("There is no Animator attached to this Model");
     }
 
+    void OnEnable()
+    {
+        if (_inputManager != null)
+        {
+            _inputManager.OnMove += UpdateMovementInput;
+            _inputManager.OnJump += HandleJump;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (_inputManager != null)
+        {
+            _inputManager.OnMove -= UpdateMovementInput;
+            _inputManager.OnJump -= HandleJump;
+        }
+    }
+
     void Update()
-    {   
-        if (_enableJump) Jump();
+    { 
         Debug.DrawRay(transform.position, transform.forward * 2, Color.purple);
         HandleFootsteps();
     }
@@ -65,12 +84,17 @@ public class PlayerMovement : MonoBehaviour
         MoveAndRotate();
     }
 
+    private void UpdateMovementInput(Vector2 newMoveInput)
+    {
+        _currentMoveInput = newMoveInput;
+    }
+
     private void MoveAndRotate()
     {
         if (_isPlayerFrozen) return;
 
         _playerModelAnimator.SetBool("isMoving", false);
-        Vector3 inputDirection = new Vector3(_playerInputHandler.MoveInput.x, 0f, _playerInputHandler.MoveInput.y).normalized;
+        Vector3 inputDirection = new Vector3(_currentMoveInput.x, 0f, _currentMoveInput.y).normalized;
 
         if (inputDirection.magnitude >= 0.1f)
         {
@@ -85,9 +109,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Jump()
+    private void HandleJump()
     {
-        if (_playerInputHandler.JumpTriggered && IsGrounded())
+        if (_enableJump && !_isPlayerFrozen && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
@@ -113,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsPlayerFrozen() => _isPlayerFrozen;
 
+    // I think I can decouple this in the future
     public void WalkToCinematicMark()
     {
         StartCoroutine(IntroWalkRoutine());
@@ -149,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleFootsteps()
     {
-        bool isWalkingManually = !_isPlayerFrozen && _playerInputHandler.MoveInput.magnitude > 0.1f;
+        bool isWalkingManually = !_isPlayerFrozen && _currentMoveInput.magnitude > 0.1f;
         bool isWalkingCinematically = _isPlayerFrozen && _playerModelAnimator.GetBool("isMoving");
 
         if (IsGrounded() && (isWalkingManually || isWalkingCinematically))
