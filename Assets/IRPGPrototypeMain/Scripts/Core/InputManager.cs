@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
     private InputActionMap _playerMap;
     private InputActionMap _uiMap;
 
-    private InputAction _moveAction, _jumpAction, _attackAction, _pauseAction, _cancelAction;
+    private InputAction _moveAction, _jumpAction, _attackAction, _pauseAction, _cancelAction, _interactAction;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
         _moveAction = _playerMap.FindAction("Move");
         _jumpAction = _playerMap.FindAction("Jump");
         _attackAction = _playerMap.FindAction("Attack");
+        _interactAction = _playerMap.FindAction("Interact");
         _cancelAction = _uiMap.FindAction("Cancel");
         // _pauseAction = _playerMap.FindAction("Pause");
 
@@ -37,9 +38,10 @@ public class InputManager : MonoBehaviour
 
         _jumpAction.performed += _ => OnJump?.Invoke();
         _attackAction.performed += _ => OnAttack?.Invoke();
+        _interactAction.performed += _ => OnInteract?.Invoke();
+        _cancelAction.performed += _ => OnCancel?.Invoke();
         // _pauseAction.performed += _ => OnPauseToggle?.Invoke();
 
-        _cancelAction.performed += _ => OnCancel?.Invoke();
     }
 
     private void OnEnable()

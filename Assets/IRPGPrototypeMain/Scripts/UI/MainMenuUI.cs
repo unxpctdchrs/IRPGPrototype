@@ -23,7 +23,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnStartGameClicked()
     {
-        _sceneService.LoadScene(SceneType.DebugScene);
+        _sceneService.LoadScene(SceneType.ShedScene);
     }
 
     private void OnQuitClicked()

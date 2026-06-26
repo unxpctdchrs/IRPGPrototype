@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c338e4224632e48439a2700499e3b5f4, type: 3}
-  m_Name: Toad
+  m_Name: Bob
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  CharacterName: Bob Da Frog
+  CharacterName: Bob
   MaxHealth: 50
   BaseDamage: 4
-  BattlePrefab: {fileID: 0}
+  BattlePrefab: {fileID: 3304001655973334585, guid: bc9f69c2227ae49f4977649c33d2d40e, type: 3}

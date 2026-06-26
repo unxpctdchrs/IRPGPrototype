@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 279550795}
   - component: {fileID: 279550796}
   m_Layer: 0
-  m_Name: Flowchart
+  m_Name: IntroFlowchart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,9 +830,9 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 279550781}
   selectedCommands:
-  - {fileID: 279550796}
+  - {fileID: 279550790}
   variables: []
-  description: 
+  description: Intro
   stepPause: 0
   colorCommands: 1
   hideComponents: 1
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   itemId: 17
   indentLevel: 0
   storyText: Pergilah ke dunia ghaib, dan aku ingin engkau mengambil 1 jantung pocong
-    dan 1 jantung kuntilanak di dunia itu
+    dan 1 jantung kuntilanak di dunia itu.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Say
   itemId: 21
   indentLevel: 0
-  storyText: Oh dan mungkin kau akan memerlukan ini
+  storyText: Oh dan mungkin kau akan memerlukan ini.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Say
   itemId: 25
   indentLevel: 0
-  storyText: Engkau dapat pergi ke dunia ghaib melalui pintu itu
+  storyText: Engkau dapat pergi ke dunia ghaib melalui pintu itu.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Say
   itemId: 45
   indentLevel: 0
-  storyText: Oh dan bawalah bob bersamamu
+  storyText: Oh dan bawalah bob bersamamu.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Say
   itemId: 46
   indentLevel: 0
-  storyText: Dia adalah salah satu karya seniku
+  storyText: Dia adalah salah satu karya seniku.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -2540,7 +2540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Say
   itemId: 56
   indentLevel: 0
-  storyText: AHAHAHAH, Meskipun penampilannya begitu, dia punya skill untuk menyembuhkan
+  storyText: AHAHAHAH, Meskipun penampilannya begitu, dia punya skill untuk menyembuhkan.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -2600,7 +2600,7 @@ MonoBehaviour:
   callMode: 0
 --- !u!114 &279550795
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2645,7 +2645,7 @@ MonoBehaviour:
   callMode: 0
 --- !u!114 &279550796
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4315,6 +4315,135 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6050236081867286357, guid: 421c848ce216043d2bb12fe066be2c29, type: 3}
   m_PrefabInstance: {fileID: 865164457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &881652536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881652537}
+  - component: {fileID: 881652538}
+  m_Layer: 6
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881652537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881652536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1898225429299017277}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &881652538
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881652536}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &890687258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5169029769186761425, guid: c773493595e3840a890340537cb37a64, type: 3}
@@ -5341,6 +5470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 396614300905794656, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1061649616182060452, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.6
@@ -5381,9 +5514,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3522261299121047113, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522261299121047113, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522261299121047113, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522261299121047113, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3668731235193732387, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.640001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9790811
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.20347072
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000023254564
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700632040429648665, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000053544266
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800975256981052753, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800975256981052753, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800975256981052753, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800975256981052753, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5858694905576062543, guid: 400d9924744aa4614bbc798c07dd186a, type: 3}
       propertyPath: _cinematicTarget
@@ -5764,6 +5953,8 @@ PlayableDirector:
     value: {fileID: 1463590730827914931}
   - key: {fileID: -4428053566216634305, guid: f9c6c730a98fa4e5ebd7c550b3285877, type: 2}
     value: {fileID: 8809223241363799277}
+  - key: {fileID: 506307527132206946, guid: f9c6c730a98fa4e5ebd7c550b3285877, type: 2}
+    value: {fileID: 881652538}
   m_ExposedReferences:
     m_References:
     - 90f9533d16296404681a02cc04519bd6: {fileID: 0}
@@ -8469,7 +8660,8 @@ Transform:
   m_LocalPosition: {x: 0.006099639, y: -0.00411077, z: 0.002385441}
   m_LocalScale: {x: 0.37474048, y: 0.3747405, z: 0.37474048}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 881652537}
   m_Father: {fileID: 543450651994637258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2027228451071148930
@@ -10235,6 +10427,7 @@ GameObject:
   - component: {fileID: 808845471527798729}
   - component: {fileID: 470062187990465683}
   - component: {fileID: 6630918606927392727}
+  - component: {fileID: 6630918606927392728}
   m_Layer: 0
   m_Name: Worn Doorframe_006
   m_TagString: Untagged
@@ -10263,6 +10456,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.00897005, y: 0.0014759613, z: 0.019396037}
   m_Center: {x: 0, y: 0.000011509138, z: -0.0021160606}
+--- !u!114 &6630918606927392728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630918606927392726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddd65becea554e82a0f5cce59e34a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &6838908490119451666
 GameObject:
   m_ObjectHideFlags: 0

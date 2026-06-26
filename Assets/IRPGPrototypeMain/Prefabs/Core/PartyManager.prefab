@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PartyManager
   _startingCharacters:
   - {fileID: 11400000, guid: e9800cbebc8274a01a370087b604d833, type: 2}
+  - {fileID: 11400000, guid: f63d53b803dfa4a25b0768f65f6508a4, type: 2}
