@@ -16,3 +16,4 @@ MonoBehaviour:
   ChildEnemy:
   - {fileID: 4123898435563009422, guid: ecccd4f0b5a304fdf9c6c128ba884a08, type: 3}
   - {fileID: 4123898435563009422, guid: ecccd4f0b5a304fdf9c6c128ba884a08, type: 3}
+  - {fileID: 6146565972350395692, guid: 460f3379ec17c4d0d965ba9ebfc80c43, type: 3}

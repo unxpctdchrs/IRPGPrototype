@@ -1,5 +1,5 @@
 public interface IBattler
 {
-    void ExecuteTurn(BattleController controller);
+    void ExecuteTurn(TurnBaseController controller);
     void TakeDamage(float damageAmount);
 }

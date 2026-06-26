@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 5527738781918307481}
   - component: {fileID: 1117345468174663878}
   - component: {fileID: 8534751975413851400}
-  - component: {fileID: -7738464504782565460}
+  - component: {fileID: 7064683142819740854}
   - component: {fileID: 3555139916072325992}
   m_Layer: 0
   m_Name: PlayerBattle
@@ -495,7 +495,7 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &-7738464504782565460
+--- !u!114 &7064683142819740854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -504,9 +504,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2669396839083417964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b758b6e591d74ab594f55ae5171ee89, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d55ca7e8cdf24e39aa22973717e12dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MCBattleController
+  _meshRenderer: {fileID: 5171418000665107053}
+  _damageColor: {r: 1, g: 0, b: 0, a: 1}
+  _impulseSource: {fileID: 3555139916072325992}
+  _attackVFX: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
+  _vfxOffset: {x: 0, y: 1, z: 0}
+  CharacterName: 
+  MaxHP: 0
+  CurrentHP: 0
   _dashTime: 0.4
   _dashCurve:
     serializedVersion: 2
@@ -543,11 +551,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _battleUIManager: {fileID: 0}
   _mcAnimator: {fileID: 0}
-  _impulseSource: {fileID: 0}
-  _swordSlashVfxPrefab: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
-  _vfxOffset: {x: 0, y: 1, z: 0}
-  _mcMesh: {fileID: 5171418000665107053}
-  _damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3555139916072325992
 MonoBehaviour:
   m_ObjectHideFlags: 0

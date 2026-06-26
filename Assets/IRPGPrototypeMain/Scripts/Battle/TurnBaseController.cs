@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BattleController : MonoBehaviour
+public class TurnBaseController : MonoBehaviour
 {
     [SerializeField] private BattleUIManager _battleUIManager;
     [SerializeField] private TargetSelector _targetSelector;
@@ -72,11 +72,15 @@ public class BattleController : MonoBehaviour
     private void ExecutePlayerAttack(IBattler target)
     {
         Debug.Log($"[BattleController] Player is executing an attack on {((MonoBehaviour)target).gameObject.name}!");
-        MCBattleController activePlayer = _turnQueue[_currentTurnIndex] as MCBattleController;
+        IBattler currentBattler = _turnQueue[_currentTurnIndex];
         
-        if (activePlayer != null)
+        if (currentBattler is IPartyMember activePlayer)
         {
             activePlayer.PlayAttackAnimation(target);
+        }
+        else
+        {
+            Debug.LogError("Tried to execute a player attack, but the current turn does not belong to a Party Member");
         }
     }
 
