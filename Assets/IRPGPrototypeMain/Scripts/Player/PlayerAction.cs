@@ -84,4 +84,14 @@ public class PlayerAction : MonoBehaviour
             }
         }
     }
+
+    public void EnableAttack(bool state)
+    {
+        _enableAttack = state;
+    }
+
+    public void ShowMeleeWeapon(bool state)
+    {
+        _meleeModel.gameObject.SetActive(state);
+    }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 
@@ -6,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private bool _enableMovement = false;
     [SerializeField] private bool _enableJump = false;
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
@@ -14,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] private Transform _mainCameraTransform;
+    [SerializeField] private CinemachineCamera _playerCinemachineCamera;
 
     [Header("Intro Cinematic Settings")]
     [SerializeField] private Transform _cinematicTarget;
@@ -41,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // _playerInputHandler = GetComponent<PlayerInputHandler>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!_enableMovement) return;
         MoveAndRotate();
     }
 
@@ -152,10 +155,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 flatTarget = new Vector3(_cinematicTarget.position.x, transform.position.y, _cinematicTarget.position.z);
             
-            if (Vector3.Distance(transform.position, flatTarget) <= 0.1f)
-            {
-                break; 
-            }
+            if (Vector3.Distance(transform.position, flatTarget) <= 0.1f) break; 
 
             Vector3 newPos = Vector3.MoveTowards(transform.position, flatTarget, _cinematicWalkSpeed * Time.deltaTime);
             _rigidbody.MovePosition(newPos);
@@ -169,7 +169,18 @@ public class PlayerMovement : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+        
         _playerModelAnimator.SetBool("isMoving", false);
+        Quaternion finalRotation = Quaternion.Euler(0, _cinematicTarget.eulerAngles.y, 0);
+
+        while (Quaternion.Angle(transform.rotation, finalRotation) > 0.5f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 10f);
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.rotation = finalRotation; 
+        FreezePlayer(false);
     }
 
     private void HandleFootsteps()
@@ -192,5 +203,15 @@ public class PlayerMovement : MonoBehaviour
                 _distanceTraveled = 0f;
             }
         }
+    }
+
+    public void EnablePlayerCinemachineCamera(bool state)
+    {
+        _playerCinemachineCamera.gameObject.SetActive(state);
+    }
+
+    public void EnableMovement(bool state)
+    {
+        _enableMovement = state;
     }
 }

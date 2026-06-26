@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 623792174}
   - component: {fileID: 623792176}
   - component: {fileID: 623792177}
+  - component: {fileID: 623792178}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e66b40d24c624ee891baa4331cf8c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameInitializer
-  _startScene: 3
+  _startScene: 2
 --- !u!114 &623792177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,21 @@ MonoBehaviour:
   _normalFogColor: {r: 0.15, g: 0.34, b: 0.39, a: 1}
   _hauntedFogColor: {r: 0.51, g: 0.19, b: 0.2, a: 1}
   _transitionDuration: 3
+--- !u!114 &623792178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623792173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c191e671899344e81b374091c64c9b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneAudioCoordinator
+  _mainMenuAmbience: {fileID: 0}
+  _shedAmbience: {fileID: 8300000, guid: 6845115cc87824156811c1429ef0ded2, type: 3}
+  _worldAmbience: {fileID: 8300000, guid: 542b27a545d74467cb12d5fea826e9bd, type: 3}
 --- !u!1 &670068200
 GameObject:
   m_ObjectHideFlags: 1
@@ -337,7 +353,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.297565
+  field of view: 60.074142
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -363,8 +379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904112812}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12607841, y: -0.2566039, z: 0.033782605, w: 0.9576625}
-  m_LocalPosition: {x: 7.3404393, y: 3.7393193, z: -9.631687}
+  m_LocalRotation: {x: -0.011654943, y: 0.9868291, z: -0.083399035, w: -0.13812041}
+  m_LocalPosition: {x: 3.837161, y: 4.4002934, z: 13.709274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
