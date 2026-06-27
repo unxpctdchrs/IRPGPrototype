@@ -13,14 +13,14 @@
 | Input | Action |
 |-------|--------|
 | `A / D` | Cycle between characters / targets |
-| `E` | Confirm selection |
+| `Enter` | Confirm selection |
 | `Escape` | Cancel / go back |
 
 ### Battle — Action Menu
 | Input | Action |
 |-------|--------|
 | `W / S` | Navigate actions (Attack, Skill, Item) |
-| `E` | Confirm action |
+| `Enter` | Confirm action |
 
 ---
 ## 🛠️ Built With
