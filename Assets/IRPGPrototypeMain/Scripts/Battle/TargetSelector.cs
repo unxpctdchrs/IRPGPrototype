@@ -6,6 +6,7 @@ using Zenject;
 public class TargetSelector : MonoBehaviour
 {
     [SerializeField] private GameObject _selectionCursor;
+    
     [SerializeField] private Vector3 _cursorOffset = new Vector3(0, 1.5f, 0);
 
     public event Action<IBattler> OnTargetConfirmed;

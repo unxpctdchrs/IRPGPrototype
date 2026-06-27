@@ -4,7 +4,6 @@ using UnityEngine;
 public class KuntilanakBattleController : BaseCharacterBattleController
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private HealthBar _healthBar;
     private float _kuntiDamage = 20f;
     private Quaternion _startRotation;
 

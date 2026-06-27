@@ -2,68 +2,37 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class MCBattleController : BaseCharacterBattleController, IPartyMember
+public class MCBattleController : BasePartyMemberController
 {
-    [Header("Character Info")]
-    [HideInInspector] public string CharacterName;
-    [HideInInspector] public float MaxHP;
-    [HideInInspector] public float CurrentHP;
-    private HealthBar _healthBar;
-
-    [Space]
-
     [SerializeField] private float _dashTime = 1.0f;
     [SerializeField] private AnimationCurve _dashCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
-    [SerializeField] private BattleUIManager _battleUIManager;
     [SerializeField] private Animator _mcAnimator;
-
     private Vector3 _startPosition;
-    private float _shovelDamage;
 
     protected override void Start()
     {
         base.Start();
-        if (_battleUIManager == null) _battleUIManager = FindFirstObjectByType<BattleUIManager>();
         if (_mcAnimator == null) _mcAnimator = GetComponent<Animator>();
         _startPosition = transform.position;
     }
 
-    public void SetupPartyMember(CharacterData data, HealthBar linkedUI)
-    {
-        CharacterName = data.CharacterName;
-        MaxHP = data.MaxHealth;
-        CurrentHP = data.MaxHealth;
-        _healthBar = linkedUI;
-        _shovelDamage = data.BaseDamage;
-    }
-    
-    public override void ExecuteTurn(TurnBaseController controller)
-    {
-        _currentController = controller;
-        if (_battleUIManager != null) _battleUIManager.OpenActionMenu();
-    }
-
-    public override void TakeDamage(float damageAmount)
-    {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
-        base.TakeDamage(damageAmount);
-    }
-
-    public void PlayAttackAnimation(IBattler target)
+    public override void PlayAttackAnimation(IBattler target)
     {
         _currentTarget = target;
         StartCoroutine(AttackDashRoutine(target));
     }
 
+    // this function called from the attack animation clip
     public void OnAttackHitTarget()
     {
         if (_currentTarget != null)
         { 
-            _currentTarget.TakeDamage(_shovelDamage);
+            _currentTarget.TakeDamage(_attackDamage);
             PlayHitFeedback();
         }
     }
 
+    // this is also called from the end of attack animation clip
     public void OnAttackAnimationComplete()
     {
         StartCoroutine(ReturnDashRoutine());
@@ -105,4 +74,9 @@ public class MCBattleController : BaseCharacterBattleController, IPartyMember
         if (_currentController != null) _currentController.ReportTurnFinished();
     }
 
+    public override void PlaySkillAnimation(IBattler target, SkillData skill)
+    {
+        Debug.LogWarning("[MCBattleController] this character has no skills");
+        _currentController.ReportTurnFinished();
+    }
 }

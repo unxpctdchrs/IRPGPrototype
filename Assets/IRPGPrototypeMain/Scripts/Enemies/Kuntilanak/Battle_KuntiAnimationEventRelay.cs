@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class AnimationEventRelay : MonoBehaviour
+public class Battle_KuntiAnimationEventRelay : MonoBehaviour
 {
-    [Header("Link to Parent Script")]
     public KuntilanakBattleController MainController;
 
     public void TriggerHit()

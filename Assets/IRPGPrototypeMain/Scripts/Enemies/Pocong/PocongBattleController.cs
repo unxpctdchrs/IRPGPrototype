@@ -5,7 +5,6 @@ public class PocongBattleController : BaseCharacterBattleController
 {
     [Header("Pocong Info")]
     [SerializeField] private Animator _pocongBattleAnimator;
-    [SerializeField] private HealthBar _healthBar;
 
     private Vector3 _startPosition;
     private Quaternion _startRotation;

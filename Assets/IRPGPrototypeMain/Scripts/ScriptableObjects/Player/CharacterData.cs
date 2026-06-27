@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/Character Data")]
@@ -7,4 +8,6 @@ public class CharacterData : ScriptableObject
     public int MaxHealth;
     public int BaseDamage;
     public GameObject BattlePrefab;
+
+    public List<SkillData> AvailableSkills;
 }

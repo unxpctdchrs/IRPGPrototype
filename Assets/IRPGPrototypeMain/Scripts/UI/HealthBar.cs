@@ -25,6 +25,11 @@ public class HealthBar : MonoBehaviour
         _currentHealth -= damage;
     }
 
+    public void TakeHealing(float amount)
+    {
+        _currentHealth = Mathf.Min(_currentHealth + amount, _maxHealth);
+    }
+
     public void SetupHealthBar(float _normalValue)
     {
         _currentHealth = _normalValue;

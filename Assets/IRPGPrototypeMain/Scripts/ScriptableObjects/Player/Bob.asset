@@ -16,3 +16,5 @@ MonoBehaviour:
   MaxHealth: 50
   BaseDamage: 4
   BattlePrefab: {fileID: 3304001655973334585, guid: bc9f69c2227ae49f4977649c33d2d40e, type: 3}
+  AvailableSkills:
+  - {fileID: 11400000, guid: 1ab2637a3306844ddbd9ddcd0364880f, type: 2}

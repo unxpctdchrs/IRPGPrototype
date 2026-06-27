@@ -134,4 +134,9 @@ public class OLDPocongBattleController : MonoBehaviour, IBattler
         yield return new WaitForSecondsRealtime(duration);    
         Time.timeScale = 1f; 
     }
+
+    public void TakeHealing(float healAmount)
+    {
+        throw new System.NotImplementedException();
+    }
 }

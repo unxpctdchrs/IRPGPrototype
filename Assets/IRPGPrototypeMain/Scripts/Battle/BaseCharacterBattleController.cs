@@ -11,6 +11,11 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
     [SerializeField] protected GameObject _attackVFX;
     [SerializeField] protected Vector3 _vfxOffset = new Vector3(0, 1f, 0);
 
+    [Header("Health Stats")]
+    [SerializeField] protected float _maxHP = 100f;
+    protected float _currentHP;
+    [SerializeField] protected HealthBar _healthBar;
+
     protected Color _originalColor;
     protected TurnBaseController _currentController;
     protected IBattler _currentTarget;
@@ -52,6 +57,22 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
         if (_impulseSource != null) _impulseSource.GenerateImpulse();
     }
 
+    protected void PlaySkillFeedback(IBattler target, SkillData skill, bool causedDamage)
+    {
+        if (causedDamage)
+        {
+            if (!IsTimeFrozen) StartCoroutine(HitStopRoutine(0.1f));
+            if (_impulseSource != null) _impulseSource.GenerateImpulse();
+        }
+
+        if (skill.SkillVFX != null)
+        {
+            Vector3 spawnPosition = ((MonoBehaviour)target).transform.position + _vfxOffset;
+            GameObject vfxInstance = Instantiate(skill.SkillVFX, spawnPosition, skill.SkillVFX.transform.rotation);
+            Destroy(vfxInstance, 2.0f);
+        }
+    }
+
     protected IEnumerator HitStopRoutine(float duration)
     {
         IsTimeFrozen = true;
@@ -61,5 +82,10 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
         
         Time.timeScale = 1f; 
         IsTimeFrozen = false;
+    }
+
+    public void TakeHealing(float healAmount)
+    {
+        if (_healthBar != null) _healthBar.TakeHealing(healAmount);
     }
 }

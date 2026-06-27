@@ -43,7 +43,7 @@ public class OLDMCBattleController : MonoBehaviour, IBattler, IPartyMember
         _currentController = controller;
         if (_battleUIManager != null) 
         {
-            _battleUIManager.OpenActionMenu();
+            // _battleUIManager.OpenActionMenu();
         }
     }
 
@@ -151,5 +151,20 @@ public class OLDMCBattleController : MonoBehaviour, IBattler, IPartyMember
         MaxHP = data.MaxHealth;
         CurrentHP = data.MaxHealth;
         _myDynamicHealthBar = linkedUI;
+    }
+
+    public void TakeHealing(float healAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void ExecuteSkill(SkillData skill, IBattler target)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void PlaySkillAnimation(IBattler target, SkillData skill)
+    {
+        throw new System.NotImplementedException();
     }
 }
