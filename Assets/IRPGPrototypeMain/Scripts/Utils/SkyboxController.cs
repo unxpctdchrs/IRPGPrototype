@@ -130,6 +130,8 @@ public class SkyboxController : MonoBehaviour
             case SceneType.WorldScene:
                 TriggerSpookyEnvironment();
                 break;
+            case SceneType.TransitionScene:
+                break;
             case SceneType.BattleScene:
                 TriggerSpookyEnvironment();
                 break;

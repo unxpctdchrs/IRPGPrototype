@@ -7,13 +7,19 @@ public enum SceneType
     ShedScene, 
     WorldScene,
     BattleScene,
-    TransitionScene
+    TransitionScene,
+    PauseMenu,
+    ThankYou
 }
 
 public interface ISceneService
 {
     event Action<SceneType> OnSceneLoaded;
-    void LoadScene(SceneType sceneType);
     SceneType CurrentScene { get; }
+    void LoadScene(SceneType sceneType);
     void LoadScene(string sceneName);
+    void UnloadScene(SceneType sceneType);
+    void UnloadScene(string sceneName);
+    void LoadSceneAdditive(SceneType sceneType);
+    void LoadSceneAdditive(string sceneName);
 }

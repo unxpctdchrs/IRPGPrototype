@@ -62,4 +62,64 @@ public class SceneService : ISceneService
         CurrentScene = sceneType;
         OnSceneLoaded?.Invoke(sceneType);
     }
+
+    public void UnloadScene(SceneType sceneType)
+    {
+        UnloadScene(sceneType.ToString());
+    }
+
+    public void UnloadScene(string sceneName)
+    {
+        _coroutineRunner.Run(UnloadSceneCoroutine(sceneName));
+    }
+
+    private IEnumerator UnloadSceneCoroutine(string sceneName)
+    {
+        Scene scene = SceneManager.GetSceneByName(sceneName);
+        
+        if (scene.isLoaded)
+        {
+            var unloadOp = SceneManager.UnloadSceneAsync(scene);
+            while (unloadOp != null && !unloadOp.isDone) yield return null;
+            
+            Debug.Log($"[SceneService] Successfully unloaded additive scene: {sceneName}");
+        }
+        else
+        {
+            Debug.LogWarning($"[SceneService] Attempted to unload {sceneName}, but it is not currently loaded.");
+        }
+    }
+
+    public void LoadSceneAdditive(SceneType sceneType)
+    {
+        _coroutineRunner.Run(LoadSceneAdditiveCoroutine(sceneType));
+    }
+
+    public void LoadSceneAdditive(string sceneName)
+    {
+        if (System.Enum.TryParse<SceneType>(sceneName, out var sceneType))
+        {
+            LoadSceneAdditive(sceneType);
+        }
+        else
+        {
+            Debug.LogError($"[SceneService] Unknown scene for additive load: {sceneName}");
+        }
+    }
+
+    private IEnumerator LoadSceneAdditiveCoroutine(SceneType sceneType)
+    {
+        string sceneString = sceneType.ToString();
+
+        if (SceneManager.GetSceneByName(sceneString).isLoaded)
+        {
+            Debug.LogWarning($"[SceneService] {sceneString} is already loaded additively.");
+            yield break;
+        }
+
+        var loadOp = SceneManager.LoadSceneAsync(sceneString, LoadSceneMode.Additive);
+        while (loadOp != null && !loadOp.isDone) yield return null;
+
+        Debug.Log($"[SceneService] Successfully loaded additive scene: {sceneString}");
+    }
 }

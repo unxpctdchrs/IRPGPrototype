@@ -14,4 +14,21 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log($"[Inventory] Got {amount}x {item.ItemName}. Total owned: {_inventory[item]}");
     }
+
+    public bool HasItem(ItemData item, int amount = 1)
+    {
+        return _inventory.ContainsKey(item) && _inventory[item] >= amount;
+    }
+ 
+    public void RemoveItem(ItemData item, int amount = 1)
+    {
+        if (!HasItem(item, amount)) return;
+ 
+        _inventory[item] -= amount;
+ 
+        if (_inventory[item] <= 0)
+            _inventory.Remove(item);
+ 
+        Debug.Log($"[Inventory] Removed {amount}x {item.ItemName}.");
+    }
 }

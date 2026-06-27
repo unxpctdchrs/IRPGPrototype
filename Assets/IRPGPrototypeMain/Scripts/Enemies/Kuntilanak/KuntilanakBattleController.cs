@@ -10,7 +10,7 @@ public class KuntilanakBattleController : BaseCharacterBattleController
 
     [Header("Loot Drop Settings")]
     [SerializeField] private ItemData _dropItem;
-    [SerializeField, Range(0f, 100f)] private float _dropChance = 50f;
+    [SerializeField, Range(0f, 100f)] private float _dropChance = 100f;
     private BattleKuntilanakSFX _sfx;
 
     protected override void Start()
@@ -76,7 +76,7 @@ public class KuntilanakBattleController : BaseCharacterBattleController
 
     protected override void Die()
     {
-        if (_dropItem != null && _inventoryManager != null)
+        if (_dropItem != null && _inventoryManager != null && _battleRewardTracker != null)
         {
             float roll = Random.Range(0f, 100f);
             if (roll <= _dropChance)

@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ResultUIController : MonoBehaviour
 {
-    [Header("UI Refs")]
     [SerializeField] private Transform _contentContainer;
     [SerializeField] private ResultContentUI _rowPrefab;
     [SerializeField] private Button _nextButton;
@@ -27,6 +27,15 @@ public class ResultUIController : MonoBehaviour
 
     public void ShowResults()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        if (_nextButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null); 
+            EventSystem.current.SetSelectedGameObject(_nextButton.gameObject);
+        }
+
         foreach (Transform child in _contentContainer)
         {
             Destroy(child.gameObject);

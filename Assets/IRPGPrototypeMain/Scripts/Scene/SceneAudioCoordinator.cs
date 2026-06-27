@@ -40,6 +40,7 @@ public class SceneAudioCoordinator : MonoBehaviour
                 break;
 
             case SceneType.WorldScene:
+                _audioManager.StopMusic();
                 _audioManager.CrossfadeSceneAmbience(_audioLibrary.WorldAmbience);
                 break;
 

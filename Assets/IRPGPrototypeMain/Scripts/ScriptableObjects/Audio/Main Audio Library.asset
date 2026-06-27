@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioLibrary
   ShedAmbience: {fileID: 8300000, guid: 6845115cc87824156811c1429ef0ded2, type: 3}
   WorldAmbience: {fileID: 8300000, guid: 542b27a545d74467cb12d5fea826e9bd, type: 3}
+  MainMenuAmbience: {fileID: 8300000, guid: 22a1f1a9fad134376a1b3fe8eba8b6f8, type: 3}
   StepWood: {fileID: 6418180475301049370, guid: 93560fe7ee1d84480a0be5d008c8ac9b, type: 2}
   StepConcrete: {fileID: 6418180475301049370, guid: 87f064075a6e048989a4720ff18690ea, type: 2}
   AmbushSFX: {fileID: 8300000, guid: 32cad030e56ef41c78bd0057b7715880, type: 3}

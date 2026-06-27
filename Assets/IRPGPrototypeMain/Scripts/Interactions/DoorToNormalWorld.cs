@@ -5,6 +5,7 @@ public class DoorToNormalWorld : MonoBehaviour, IInteractable
 {
     private ISceneService _sceneService;
     private ScenePayload _scenePayload;
+    [SerializeField] private Vector3 _uiOffset = new Vector3(0, 0.38f, -0.38f);
 
     [Inject]
     private void Constructor(ISceneService sceneService, ScenePayload scenePayload)
@@ -13,10 +14,7 @@ public class DoorToNormalWorld : MonoBehaviour, IInteractable
         _scenePayload = scenePayload;
     }
 
-    public Vector3 GetInteractableUIPosition()
-    {
-        return transform.position + Vector3.up * 1.5f;
-    }
+    public Vector3 GetInteractableUIPosition() => transform.position + _uiOffset;
 
     public void OnInteractStart()
     {

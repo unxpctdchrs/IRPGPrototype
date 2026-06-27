@@ -30,8 +30,7 @@ public class InputManager : MonoBehaviour
         _attackAction = _playerMap.FindAction("Attack");
         _interactAction = _playerMap.FindAction("Interact");
         _cancelAction = _uiMap.FindAction("Cancel");
-        // _pauseAction = _playerMap.FindAction("Pause");
-
+        _pauseAction = _playerMap.FindAction("Pause");
 
         _moveAction.performed += _ => OnMove?.Invoke(_.ReadValue<Vector2>());
         _moveAction.canceled += _ => OnMove?.Invoke(Vector2.zero);
@@ -40,8 +39,7 @@ public class InputManager : MonoBehaviour
         _attackAction.performed += _ => OnAttack?.Invoke();
         _interactAction.performed += _ => OnInteract?.Invoke();
         _cancelAction.performed += _ => OnCancel?.Invoke();
-        // _pauseAction.performed += _ => OnPauseToggle?.Invoke();
-
+        _pauseAction.performed += _ => OnPauseToggle?.Invoke();
     }
 
     private void OnEnable()

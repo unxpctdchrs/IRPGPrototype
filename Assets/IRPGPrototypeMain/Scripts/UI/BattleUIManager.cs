@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private GameObject _actionMenuPanel;
     [SerializeField] private Button _attackButton;
     [SerializeField] private Button _skillButton;
+    [SerializeField] private TextMeshProUGUI _skillButtonText;
     [SerializeField] private TurnBaseController _turnBaseController;
     [SerializeField] private BattleSetup _battleSetup;
 
@@ -95,6 +97,11 @@ public class BattleUIManager : MonoBehaviour
         _currentCharacterSkills = skills;
         bool hasSkills = skills != null && skills.Count > 0;
         _skillButton.interactable = hasSkills;
+
+        if (_skillButtonText != null)
+        {
+            _skillButtonText.color = hasSkills ? Color.black : Color.gray;
+        }
     }
 
     private void OnSkillSelected(SkillData skill)

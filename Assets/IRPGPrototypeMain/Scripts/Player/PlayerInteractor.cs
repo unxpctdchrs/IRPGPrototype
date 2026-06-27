@@ -1,3 +1,4 @@
+using Fungus;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +45,7 @@ public class PlayerInteractor : MonoBehaviour
             _inputManager.OnInteract += HandleInteractStart;
             _inputManager.OnCancel += HandleInteractExit;
         }
+        BlockSignals.OnBlockEnd += OnDialogueBlockEnd;
     }
 
     private void OnDisable()
@@ -53,6 +55,7 @@ public class PlayerInteractor : MonoBehaviour
             _inputManager.OnInteract -= HandleInteractStart;
             _inputManager.OnCancel -= HandleInteractExit;
         }
+        BlockSignals.OnBlockEnd -= OnDialogueBlockEnd;
     }
 
     void Update()
@@ -135,5 +138,19 @@ public class PlayerInteractor : MonoBehaviour
     {
         _enableInteraction = state;
         _interactUI.SetActive(state);
+    }
+
+    public void EndInteraction()
+    {
+        if (IsInteracting)
+        {
+            _interactableStored.OnInteractStop();
+            _interactableStored = null;
+        }
+    }
+
+    private void OnDialogueBlockEnd(Block block)
+    {
+        EndInteraction();
     }
 }

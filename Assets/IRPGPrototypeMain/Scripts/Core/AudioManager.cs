@@ -127,6 +127,11 @@ public class AudioManager : MonoBehaviour, IInitializable
         musicSource.resource = musicContainer;
         musicSource.Play();
     }
+    public void StopMusic()
+    {
+        musicSource.Stop();
+        musicSource.resource = null;
+    }
 
     public void PlayAmbience(AudioResource clip, float volume = 1f)
     {
