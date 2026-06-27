@@ -60,7 +60,7 @@ public class OLDMCBattleController : MonoBehaviour, IBattler, IPartyMember
 
     public void TakeDamage(float damageAmount)
     {
-        if (_myDynamicHealthBar != null) _myDynamicHealthBar.TakeDamage(damageAmount);
+        // if (_myDynamicHealthBar != null) _myDynamicHealthBar.TakeDamage(damageAmount);
         StartCoroutine(DamageFlashRoutine());
     }
 

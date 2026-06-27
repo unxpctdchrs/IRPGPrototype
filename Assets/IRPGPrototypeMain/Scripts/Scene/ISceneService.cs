@@ -6,7 +6,8 @@ public enum SceneType
     MainMenuScene,
     ShedScene, 
     WorldScene,
-    BattleScene
+    BattleScene,
+    TransitionScene
 }
 
 public interface ISceneService

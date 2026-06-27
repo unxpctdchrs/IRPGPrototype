@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/IRPGPrototypeMain/Scenes/GameScenes/WorldScene.unity
     guid: 798e470c35e80463ab39cb8827e918e3
+  - enabled: 1
+    path: Assets/IRPGPrototypeMain/Scenes/GameScenes/TransitionScene.unity
+    guid: f3d0685c62020450b99e03f9b1a8e06e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

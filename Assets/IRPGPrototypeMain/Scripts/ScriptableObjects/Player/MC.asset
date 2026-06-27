@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   CharacterName: Tom
   MaxHealth: 100
-  BaseDamage: 14
+  BaseDamage: 60
   BattlePrefab: {fileID: 2669396839083417964, guid: e3c92faceff2342bab09ebe62061effe, type: 3}
+  AvailableSkills: []

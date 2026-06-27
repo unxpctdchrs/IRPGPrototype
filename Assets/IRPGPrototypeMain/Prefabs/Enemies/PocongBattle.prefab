@@ -1117,6 +1117,7 @@ GameObject:
   - component: {fileID: 4337993729525624005}
   - component: {fileID: 2902478436462591693}
   - component: {fileID: 8361569205420866542}
+  - component: {fileID: 2667109971033171705}
   m_Layer: 0
   m_Name: PocongBattle
   m_TagString: Untagged
@@ -1207,8 +1208,14 @@ MonoBehaviour:
   _impulseSource: {fileID: 8361569205420866542}
   _attackVFX: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   _vfxOffset: {x: 0, y: 1, z: 0}
-  _pocongBattleAnimator: {fileID: 0}
+  _maxHP: 100
   _healthBar: {fileID: 791114548054651933}
+  _deathVFX: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  _deathSFX: {fileID: 8300000, guid: ac54b04a495934d70b6f15435d02d2d8, type: 3}
+  _vfxLifetime: 2
+  _pocongBattleAnimator: {fileID: 0}
+  _dropItem: {fileID: 11400000, guid: 390e2b60d7c6c49d0930b1f4f196f378, type: 2}
+  _dropChance: 50
 --- !u!114 &8361569205420866542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,6 +1269,20 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &2667109971033171705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123898435563009422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562c91750c9384820940365deeab4973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattlePocongSFX
+  _dashSFX: {fileID: 8300000, guid: 1dfc3ff371f444212b386405f872bbe8, type: 3}
+  _attackHitSFX: {fileID: 8300000, guid: b23cf3542cd154c948141c76172025d7, type: 3}
 --- !u!1 &4130311900716407693
 GameObject:
   m_ObjectHideFlags: 0

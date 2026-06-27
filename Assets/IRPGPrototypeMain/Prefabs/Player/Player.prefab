@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137803218509467980}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20347077, y: -0.0000000027590283, z: 0.0000000042112047, w: 0.9790811}
-  m_LocalPosition: {x: 0, y: 3.35, z: -5.64}
+  m_LocalRotation: {x: 0.20347077, y: -0.00000017315686, z: 0.00000003598513, w: 0.97908103}
+  m_LocalPosition: {x: 0.00000047683716, y: 3.35, z: -5.6399994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -147,8 +147,8 @@ MonoBehaviour:
     SplineCurvature: 0.301
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 0
-    Center: 0
+    Value: -180
+    Center: -180
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
@@ -888,6 +888,7 @@ GameObject:
   - component: {fileID: 5858694905576062543}
   - component: {fileID: 7951660693769479400}
   - component: {fileID: 6546540510938477108}
+  - component: {fileID: 3329569175420285544}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1060,6 +1061,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _playerRightHand: {fileID: 3524575733590633358}
   _enableAttack: 1
+  _hitVFXPrefab: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
+  _vfxOffset: {x: 0, y: 1, z: 0}
+  _impulseSource: {fileID: 3329569175420285544}
+  _transitionDelay: 0.4
 --- !u!114 &6546540510938477108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,8 +1077,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb0ccef1fb3343a0939c422ae5fb611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  _enableInteraction: 1
   _interactUI: {fileID: 8992146860887387525}
   _sphereRadius: 2
+--- !u!114 &3329569175420285544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668731235193732387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &3694578369449548485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractUI
       objectReference: {fileID: 0}
+    - target: {fileID: 127514028303266393, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3282760167935738509, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2088,6 +2151,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5392072072304176878, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392072072304176878, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392072072304176878, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392072072304176878, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2135,6 +2210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5392072072304176878, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5615449173077023125, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2151,6 +2230,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8599896222901169509, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4f53fea401434cf48ccfeb0000acba7, type: 3}
     - target: {fileID: 8687037011378795452, guid: 809912eaf6df64e2a958126a48094bd2, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

@@ -15,6 +15,7 @@ public class TurnBaseController : MonoBehaviour
     [Header("Managers")]
     [SerializeField] private BattleSetup _battleSetup;
     [SerializeField] private BattleUIManager _battleUIManager;
+    [SerializeField] private ResultUIController _resultUIController;
 
     [Header("Targeting Selectors")]
     [SerializeField] private TargetSelector _characterSelector;
@@ -85,7 +86,12 @@ public class TurnBaseController : MonoBehaviour
 
         if (_battleSetup.GetActiveEnemies().Count == 0)
         {
-            Debug.Log("<color=green>BATTLE WON!</color>");
+            Debug.Log("Battle Won");
+            if (_resultUIController != null)
+            {
+                _resultUIController.gameObject.SetActive(true);
+                _resultUIController.ShowResults();
+            }
             return; 
         }
 
@@ -158,6 +164,23 @@ public class TurnBaseController : MonoBehaviour
             return;
         }
 
+        BaseCharacterBattleController targetScript = nextCommand.Target as BaseCharacterBattleController;
+        if (targetScript != null && targetScript.IsDead)
+        {
+            Debug.Log("Original target is dead. Redirecting...");
+            List<IBattler> aliveEnemies = _battleSetup.GetActiveEnemies();
+            
+            if (aliveEnemies.Count > 0) 
+            {
+                nextCommand.Target = aliveEnemies[Random.Range(0, aliveEnemies.Count)];
+            }
+            else 
+            {
+                ReportTurnFinished(); 
+                return;
+            }
+        }
+
         // execute the command
         if (nextCommand.Skill == null)
         {
@@ -193,7 +216,7 @@ public class TurnBaseController : MonoBehaviour
 
         if (_battleSetup.GetActiveParty().Count == 0)
         {
-            Debug.Log("<color=red>BATTLE LOST!</color>");
+            Debug.Log("Battle Lost");
             return; 
         }
 

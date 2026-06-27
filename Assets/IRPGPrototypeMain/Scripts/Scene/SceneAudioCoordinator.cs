@@ -4,19 +4,16 @@ using Zenject;
 
 public class SceneAudioCoordinator : MonoBehaviour
 {
-    [Header("Scene Ambience Setup")]
-    [SerializeField] private AudioResource _mainMenuAmbience;
-    [SerializeField] private AudioResource _shedAmbience;
-    [SerializeField] private AudioResource _worldAmbience;
-
     private ISceneService _sceneService;
     private AudioManager _audioManager;
+    private AudioLibrary _audioLibrary;
 
     [Inject]
-    public void Construct(ISceneService sceneService, AudioManager audioManager)
+    public void Construct(ISceneService sceneService, AudioManager audioManager, AudioLibrary audioLibrary)
     {
         _sceneService = sceneService;
         _audioManager = audioManager;
+        _audioLibrary = audioLibrary;
     }
 
     private void OnEnable()
@@ -36,15 +33,19 @@ public class SceneAudioCoordinator : MonoBehaviour
         switch (sceneType)
         {
             case SceneType.MainMenuScene:
-                _audioManager.PlayAmbience(_mainMenuAmbience);
                 break;
 
             case SceneType.ShedScene:
-                _audioManager.PlayAmbience(_shedAmbience);
+                _audioManager.CrossfadeSceneAmbience(_audioLibrary.ShedAmbience);
                 break;
 
             case SceneType.WorldScene:
-                _audioManager.PlayAmbience(_worldAmbience);
+                _audioManager.CrossfadeSceneAmbience(_audioLibrary.WorldAmbience);
+                break;
+
+            case SceneType.BattleScene:
+                _audioManager.CrossfadeSceneAmbience(_audioLibrary.WorldAmbience); 
+                _audioManager.PlayMusic(_audioLibrary.BattleMusic);
                 break;
         }
     }

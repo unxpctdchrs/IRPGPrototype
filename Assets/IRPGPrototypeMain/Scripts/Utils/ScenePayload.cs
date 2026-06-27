@@ -13,6 +13,7 @@ public class ScenePayload
     public SceneType DestinationScene { get; set; }
     public List<GameObject> BattleEnemies { get; set; }
     public List<CharacterData> CurrentParty { get; set; }
+    public bool HasPlayedShedIntro = false;
 
     public void Clear()
     {

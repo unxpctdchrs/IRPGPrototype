@@ -178,7 +178,6 @@ GameObject:
   m_Component:
   - component: {fileID: 623792174}
   - component: {fileID: 623792176}
-  - component: {fileID: 623792177}
   - component: {fileID: 623792178}
   m_Layer: 0
   m_Name: GameManager
@@ -215,23 +214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameInitializer
   _startScene: 3
---- !u!114 &623792177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623792173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3164aa936104f1c88dcdf7ea48f4c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
-  _normalSkybox: {fileID: 2100000, guid: e3781f0faf6f14a9090c14fe3d0bda5b, type: 2}
-  _hauntedSkybox: {fileID: 2100000, guid: fa0f6a817800b48f19ea5a9a20d2b4ae, type: 2}
-  _normalFogColor: {r: 0.15, g: 0.34, b: 0.39, a: 1}
-  _hauntedFogColor: {r: 0.51, g: 0.19, b: 0.2, a: 1}
-  _transitionDuration: 3
 --- !u!114 &623792178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,9 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c191e671899344e81b374091c64c9b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneAudioCoordinator
-  _mainMenuAmbience: {fileID: 0}
-  _shedAmbience: {fileID: 8300000, guid: 6845115cc87824156811c1429ef0ded2, type: 3}
-  _worldAmbience: {fileID: 8300000, guid: 542b27a545d74467cb12d5fea826e9bd, type: 3}
 --- !u!1 &670068200
 GameObject:
   m_ObjectHideFlags: 1

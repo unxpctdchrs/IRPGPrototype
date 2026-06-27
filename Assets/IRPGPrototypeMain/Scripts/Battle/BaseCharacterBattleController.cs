@@ -1,6 +1,8 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Audio;
+using Zenject;
 
 public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
 {
@@ -16,14 +18,39 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
     protected float _currentHP;
     [SerializeField] protected HealthBar _healthBar;
 
+    [Header("Death Feedback")]
+    [SerializeField] private GameObject _deathVFX; 
+    [SerializeField] private AudioResource _deathSFX;
+    [SerializeField] private float _vfxLifetime = 2.0f;
+
+    protected InventoryManager _inventoryManager;
+    protected BattleRewardTracker _battleRewardTracker;
+    private AudioManager _audioManager;
+
+    [Inject]
+    public void Construct(InventoryManager inventoryManager, BattleRewardTracker battleRewardTracker, AudioManager audioManager)
+    {
+        _inventoryManager = inventoryManager;
+        _battleRewardTracker = battleRewardTracker;
+        _audioManager = audioManager;
+    }
+
     protected Color _originalColor;
     protected TurnBaseController _currentController;
     protected IBattler _currentTarget;
     protected static bool IsTimeFrozen = false;
+    public bool IsDead { get; protected set; } = false;
 
     // virtual allows child scripts to add their own Start logic while keeping this
     protected virtual void Start()
     {
+        _currentHP = _maxHP;
+
+        if (_healthBar != null)
+        {
+            _healthBar.SetupHealthBar(_currentHP, _maxHP);
+        }
+
         if (_meshRenderer != null) _originalColor = _meshRenderer.material.color;
         if (_impulseSource == null) _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
@@ -32,7 +59,17 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
 
     public virtual void TakeDamage(float damageAmount)
     {
+        if (IsDead) return;
+
+        _currentHP -= damageAmount;
+        if (_healthBar != null) _healthBar.UpdateHealth(_currentHP);
         StartCoroutine(DamageFlashRoutine());
+
+        if (_currentHP <= 0)
+        {
+            _currentHP = 0;
+            Die();
+        }
     }
 
     protected IEnumerator DamageFlashRoutine()
@@ -86,6 +123,26 @@ public abstract class BaseCharacterBattleController : MonoBehaviour, IBattler
 
     public void TakeHealing(float healAmount)
     {
-        if (_healthBar != null) _healthBar.TakeHealing(healAmount);
+        if (IsDead) return;
+        _currentHP = Mathf.Min(_currentHP + healAmount, _maxHP);
+        if (_healthBar != null) _healthBar.UpdateHealth(_currentHP);
+    }
+
+    protected virtual void Die()
+    {
+        IsDead = true;
+        Debug.Log($"[Death] {gameObject.name} has died");
+
+        if (_deathVFX != null)
+        {
+            GameObject vfx = Instantiate(_deathVFX, transform.position, _deathVFX.transform.rotation);
+            Destroy(vfx, _vfxLifetime);
+        }
+
+        if (_deathSFX != null)
+        {
+            _audioManager.PlaySFX(_deathSFX);
+        }
+        gameObject.SetActive(false); 
     }
 }

@@ -45,12 +45,6 @@ public class OLDPocongBattleController : MonoBehaviour, IBattler
         }
     }
 
-    public void TakeDamage(float damageAmount)
-    {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
-        StartCoroutine(DamageFlashRoutine());
-    }
-
     private IEnumerator DamageFlashRoutine()
     {
         if (_pocongMesh == null) yield break;
@@ -136,6 +130,11 @@ public class OLDPocongBattleController : MonoBehaviour, IBattler
     }
 
     public void TakeHealing(float healAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void TakeDamage(float damageAmount)
     {
         throw new System.NotImplementedException();
     }

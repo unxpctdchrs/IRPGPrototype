@@ -5,7 +5,7 @@ public abstract class BasePartyMemberController : BaseCharacterBattleController,
 {
     [HideInInspector] public string CharacterName;
     [HideInInspector] public float MaxHP;
-    [HideInInspector] public float CurrentHP;
+    public float CurrentHP => _currentHP;
 
     [SerializeField] protected BattleUIManager _battleUIManager;
 
@@ -22,10 +22,15 @@ public abstract class BasePartyMemberController : BaseCharacterBattleController,
     {
         CharacterName = data.CharacterName;
         MaxHP = data.MaxHealth;
-        CurrentHP = data.MaxHealth;
+        _currentHP = data.MaxHealth;
         _healthBar = linkedUI;
         _attackDamage = data.BaseDamage;
         _availableSkills = data.AvailableSkills;
+
+        if (_healthBar != null) 
+        {
+            _healthBar.SetupHealthBar(_currentHP, MaxHP);
+        }
     }
 
     public override void ExecuteTurn(TurnBaseController controller)
@@ -39,7 +44,6 @@ public abstract class BasePartyMemberController : BaseCharacterBattleController,
 
     public override void TakeDamage(float damageAmount)
     {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
         base.TakeDamage(damageAmount);
     }
 

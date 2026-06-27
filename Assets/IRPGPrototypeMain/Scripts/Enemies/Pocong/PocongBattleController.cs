@@ -6,9 +6,14 @@ public class PocongBattleController : BaseCharacterBattleController
     [Header("Pocong Info")]
     [SerializeField] private Animator _pocongBattleAnimator;
 
+    [Header("Loot Drop Settings")]
+    [SerializeField] private ItemData _dropItem;
+    [SerializeField, Range(0f, 100f)] private float _dropChance = 50f;
+
     private Vector3 _startPosition;
     private Quaternion _startRotation;
     private float _pocongDamage = 15f;
+    private BattlePocongSFX _sfx;
 
     protected override void Start()
     {
@@ -16,6 +21,7 @@ public class PocongBattleController : BaseCharacterBattleController
         if (_pocongBattleAnimator == null) _pocongBattleAnimator = GetComponentInChildren<Animator>();
         _startPosition = transform.position;
         _startRotation = transform.rotation;
+        _sfx = GetComponent<BattlePocongSFX>();
     }
 
     public override void ExecuteTurn(TurnBaseController controller)
@@ -27,17 +33,12 @@ public class PocongBattleController : BaseCharacterBattleController
         {
             Debug.Log($"Pocong is attacking {((MonoBehaviour)_currentTarget).gameObject.name}");
             StartCoroutine(AttackRoutine(_currentTarget));
+            if (_sfx != null) _sfx.PlayDashSFX();
         }
         else
         {
             _currentController.ReportTurnFinished();
         }
-    }
-
-    public override void TakeDamage(float damageAmount)
-    {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
-        base.TakeDamage(damageAmount);
     }
 
     private IEnumerator AttackRoutine(IBattler target)
@@ -66,6 +67,7 @@ public class PocongBattleController : BaseCharacterBattleController
         target.TakeDamage(_pocongDamage);
 
         PlayHitFeedback();
+        if (_sfx != null) _sfx.PlayHitSFX();
 
         yield return new WaitForSeconds(0.15f);
         StartCoroutine(ReturnRoutine());
@@ -91,5 +93,20 @@ public class PocongBattleController : BaseCharacterBattleController
         transform.position = _startPosition;
         transform.rotation = _startRotation; 
         _currentController.ReportTurnFinished();
+    }
+
+    protected override void Die()
+    {
+        if (_dropItem != null && _inventoryManager != null)
+        {
+            float roll = Random.Range(0f, 100f);
+            if (roll <= _dropChance)
+            {
+                _inventoryManager.AddItem(_dropItem, 1);
+                _battleRewardTracker.AddDrop(_dropItem);
+            }
+        }
+
+        base.Die();
     }
 }

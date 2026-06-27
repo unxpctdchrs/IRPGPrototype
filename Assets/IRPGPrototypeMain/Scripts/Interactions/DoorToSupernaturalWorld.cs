@@ -4,11 +4,13 @@ using Zenject;
 public class DoorToSupernaturalWorld : MonoBehaviour, IInteractable
 {
     private ISceneService _sceneService;
+    private ScenePayload _scenePayload;
 
     [Inject]
-    private void Constructor(ISceneService sceneService)
+    private void Constructor(ISceneService sceneService, ScenePayload scenePayload)
     {
         _sceneService = sceneService;
+        _scenePayload = scenePayload;
     }
 
     public Vector3 GetInteractableUIPosition()
@@ -18,10 +20,20 @@ public class DoorToSupernaturalWorld : MonoBehaviour, IInteractable
 
     public void OnInteractStart()
     {
-        _sceneService.LoadScene(SceneType.WorldScene);
+        if (!_scenePayload.HasPlayedShedIntro)
+        {
+            _scenePayload.HasPlayedShedIntro = true;
+        }
+        _scenePayload.DestinationScene = SceneType.WorldScene;
+        _sceneService.LoadScene(SceneType.TransitionScene);
     }
 
     public void OnInteractStop()
     {
+    }
+
+    public string GetInteractText()
+    {
+        return "Enter Supernatural World";
     }
 }

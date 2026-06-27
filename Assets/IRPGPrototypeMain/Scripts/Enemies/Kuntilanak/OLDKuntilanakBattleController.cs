@@ -41,12 +41,6 @@ public class OLDKuntilanakBattleController : MonoBehaviour, IBattler
         }
     }
 
-    public void TakeDamage(float damageAmount)
-    {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
-        StartCoroutine(DamageFlashRoutine());
-    }
-
     private IEnumerator DamageFlashRoutine()
     {
         if (_kuntiMesh == null) yield break;
@@ -87,6 +81,11 @@ public class OLDKuntilanakBattleController : MonoBehaviour, IBattler
     }
 
     public void TakeHealing(float healAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void TakeDamage(float damageAmount)
     {
         throw new System.NotImplementedException();
     }

@@ -80,6 +80,8 @@ MonoBehaviour:
   _mainAudioLibrary: {fileID: 11400000, guid: 961d85fdded544b059939af1de7bf183, type: 2}
   _partyManager: {fileID: 3120098303295651388, guid: 2463bb050952c4687bbaab4372148a79, type: 3}
   _inputManager: {fileID: 2944765993971984947, guid: 9b4e6c82c82864187a02427ff6794d22, type: 3}
+  _inventoryManager: {fileID: 4294095309097039458, guid: 8c769e377d8074d14b968e4e97420570, type: 3}
+  _skyboxController: {fileID: 4977083855592878561, guid: fef721634fd7741258d1e35891dd6e18, type: 3}
 --- !u!114 &3438075467679595599
 MonoBehaviour:
   m_ObjectHideFlags: 0

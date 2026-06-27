@@ -4,7 +4,10 @@ using UnityEngine.Audio;
 [CreateAssetMenu(menuName = "Audio/Audio Library")]
 public class AudioLibrary : ScriptableObject
 {
-    [Header("Player")]
+    public AudioResource ShedAmbience;
+    public AudioResource WorldAmbience;
     public AudioResource StepWood;
     public AudioResource StepConcrete;
+    public AudioResource AmbushSFX;
+    public AudioResource BattleMusic;
 }

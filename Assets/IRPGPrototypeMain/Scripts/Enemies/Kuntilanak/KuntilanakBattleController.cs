@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class KuntilanakBattleController : BaseCharacterBattleController
 {
@@ -7,11 +8,17 @@ public class KuntilanakBattleController : BaseCharacterBattleController
     private float _kuntiDamage = 20f;
     private Quaternion _startRotation;
 
+    [Header("Loot Drop Settings")]
+    [SerializeField] private ItemData _dropItem;
+    [SerializeField, Range(0f, 100f)] private float _dropChance = 50f;
+    private BattleKuntilanakSFX _sfx;
+
     protected override void Start()
     {
         base.Start();
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
         _startRotation = transform.rotation;
+        _sfx = GetComponent<BattleKuntilanakSFX>();
     }
 
     public override void ExecuteTurn(TurnBaseController controller)
@@ -25,17 +32,12 @@ public class KuntilanakBattleController : BaseCharacterBattleController
             transform.LookAt(targetPos);
 
             _animator.SetTrigger("isAttacking");
+            if (_sfx != null) _sfx.PlaySpellCastSFX();
         }
         else 
         {
             _currentController.ReportTurnFinished();
         }
-    }
-
-    public override void TakeDamage(float damageAmount)
-    {
-        if (_healthBar != null) _healthBar.TakeDamage(damageAmount);
-        base.TakeDamage(damageAmount);
     }
 
     public void OnAttackHitTarget()
@@ -44,6 +46,7 @@ public class KuntilanakBattleController : BaseCharacterBattleController
         { 
             _currentTarget.TakeDamage(_kuntiDamage);
             PlayHitFeedback();
+            if (_sfx != null) _sfx.PlayExplosionSFX();
         }
     }
 
@@ -69,5 +72,20 @@ public class KuntilanakBattleController : BaseCharacterBattleController
 
         transform.rotation = _startRotation;
         if (_currentController != null) _currentController.ReportTurnFinished();
+    }
+
+    protected override void Die()
+    {
+        if (_dropItem != null && _inventoryManager != null)
+        {
+            float roll = Random.Range(0f, 100f);
+            if (roll <= _dropChance)
+            {
+                _inventoryManager.AddItem(_dropItem, 1);
+                _battleRewardTracker.AddDrop(_dropItem);
+            }
+        }
+
+        base.Die();
     }
 }

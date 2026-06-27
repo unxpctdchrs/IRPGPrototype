@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class MCBattleController : BasePartyMemberController
@@ -8,12 +7,14 @@ public class MCBattleController : BasePartyMemberController
     [SerializeField] private AnimationCurve _dashCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private Animator _mcAnimator;
     private Vector3 _startPosition;
+    private BattleMCSFX _sfx;
 
     protected override void Start()
     {
         base.Start();
         if (_mcAnimator == null) _mcAnimator = GetComponent<Animator>();
         _startPosition = transform.position;
+        _sfx = GetComponent<BattleMCSFX>();
     }
 
     public override void PlayAttackAnimation(IBattler target)
@@ -29,6 +30,7 @@ public class MCBattleController : BasePartyMemberController
         { 
             _currentTarget.TakeDamage(_attackDamage);
             PlayHitFeedback();
+            if (_sfx != null) _sfx.PlayHitSFX();
         }
     }
 
@@ -40,6 +42,8 @@ public class MCBattleController : BasePartyMemberController
 
     private IEnumerator AttackDashRoutine(IBattler target)
     {
+        if (_sfx != null) _sfx.PlayDashSFX();
+
         Vector3 targetPos = ((MonoBehaviour)target).transform.position;
         Vector3 attackPos = targetPos + (_startPosition - targetPos).normalized * 1.5f;
         transform.LookAt(attackPos);

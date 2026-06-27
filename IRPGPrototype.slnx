@@ -1,6 +1,6 @@
 ﻿<Solution>
-  <Project Path="Fungus.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Fungus.csproj" />
   <Project Path="FungusEditor.csproj" />
   <Project Path="CFXRRuntime.csproj" />
   <Project Path="Zenject.csproj" />

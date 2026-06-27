@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -13,15 +14,24 @@ public class BattleSetup : MonoBehaviour
 
     private List<IBattler> _activeEnemies = new List<IBattler>();
     private List<IBattler> _activeParty = new List<IBattler>();
-    public List<IBattler> GetActiveEnemies() => _activeEnemies;
-    public List<IBattler> GetActiveParty() => _activeParty;
+    public List<IBattler> GetActiveEnemies() 
+    {
+        return _activeEnemies.Where(e => !((BaseCharacterBattleController)e).IsDead).ToList();
+    }
+
+    public List<IBattler> GetActiveParty() 
+    {
+        return _activeParty.Where(p => !((BaseCharacterBattleController)p).IsDead).ToList();
+    }
 
     private ScenePayload _payload;
+    private DiContainer _diContainer;
 
     [Inject]
-    public void Construct(ScenePayload payload)
+    public void Construct(ScenePayload payload, DiContainer diContainer)
     {
         _payload = payload;
+        _diContainer = diContainer;
     }
 
     private void Start()
@@ -57,7 +67,7 @@ public class BattleSetup : MonoBehaviour
 
             if (enemyPrefab != null)
             {
-                GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnSlot.position, spawnSlot.rotation, spawnSlot);
+                GameObject spawnedEnemy = _diContainer.InstantiatePrefab(enemyPrefab, spawnSlot.position, spawnSlot.rotation, spawnSlot);
                 if (spawnedEnemy.TryGetComponent(out IBattler battlerComponent))
                 {
                     _activeEnemies.Add(battlerComponent);
@@ -72,7 +82,7 @@ public class BattleSetup : MonoBehaviour
 
             if (characterData != null && characterData.BattlePrefab != null)
             {
-                GameObject spawnedParty = Instantiate(characterData.BattlePrefab, spawnSlot.position, spawnSlot.rotation, spawnSlot);
+                GameObject spawnedParty = _diContainer.InstantiatePrefab(characterData.BattlePrefab, spawnSlot.position, spawnSlot.rotation, spawnSlot);
                 
                 if (spawnedParty.TryGetComponent(out IBattler battlerComponent))
                 {

@@ -9,7 +9,7 @@ public class CharacterInfoUI : MonoBehaviour
     public void SetupUI(CharacterData data)
     {
         _nameText.text = data.CharacterName;
-        _healthBar.SetupHealthBar(data.MaxHealth); 
+        _healthBar.SetupHealthBar(data.MaxHealth, data.MaxHealth);
     }
 
     public HealthBar GetHealthBar() => _healthBar;

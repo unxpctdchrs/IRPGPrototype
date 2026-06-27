@@ -627,6 +627,7 @@ GameObject:
   - component: {fileID: 6555408801524073669}
   - component: {fileID: 2776822038128380526}
   - component: {fileID: 3089126823594599752}
+  - component: {fileID: 2382932568193676227}
   m_Layer: 7
   m_Name: KuntilanakBattle
   m_TagString: Untagged
@@ -717,8 +718,14 @@ MonoBehaviour:
   _impulseSource: {fileID: 3089126823594599752}
   _attackVFX: {fileID: 7226888052703040409, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
   _vfxOffset: {x: 0, y: 0, z: 0}
-  _animator: {fileID: 0}
+  _maxHP: 100
   _healthBar: {fileID: 7394863739747765633}
+  _deathVFX: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  _deathSFX: {fileID: 8300000, guid: ac54b04a495934d70b6f15435d02d2d8, type: 3}
+  _vfxLifetime: 2
+  _animator: {fileID: 0}
+  _dropItem: {fileID: 11400000, guid: 92102a21902f044b5a4a3384976feefb, type: 2}
+  _dropChance: 50
 --- !u!114 &3089126823594599752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +779,20 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &2382932568193676227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146565972350395692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c393e1e425c4864939129c101375e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleKuntilanakSFX
+  _explosionSFX: {fileID: 8300000, guid: 2d9d13a60ab2d44aab931b712b04e2ba, type: 3}
+  _spellCastSFX: {fileID: 8300000, guid: 8c87dc41cb5554b29bb7e92c9982a42c, type: 3}
 --- !u!1 &6375604784503211916
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,4 +102,26 @@ public class KuntilanakWorldAI : MonoBehaviour
         Gizmos.color = Color.purple;
         Gizmos.DrawWireSphere(transform.position, _chaseDistance);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.TryGetComponent(out PlayerAction playerAction))
+            {
+                playerAction.TriggerEnemyInitiatedBattle(GetComponent<EnemyBackpack>(), collision.GetContact(0).point);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.TryGetComponent(out PlayerAction playerAction))
+            {
+                playerAction.TriggerEnemyInitiatedBattle(GetComponent<EnemyBackpack>(), other.ClosestPoint(transform.position));
+            }
+        }
+    }
 }

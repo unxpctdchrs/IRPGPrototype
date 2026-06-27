@@ -9,6 +9,7 @@ public class BobBattleController : BasePartyMemberController
     private Quaternion _startRotation;
     [SerializeField] private float _dashTime = 0.4f;
     [SerializeField] private AnimationCurve _dashCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    private BattleBobSFX _sfx;
 
     protected override void Start()
     {
@@ -16,12 +17,14 @@ public class BobBattleController : BasePartyMemberController
         if (_bobAnimator == null) _bobAnimator = GetComponent<Animator>();
         _startPosition = transform.position;
         _startRotation = transform.rotation;
+        _sfx = GetComponent<BattleBobSFX>();
     }
 
     public override void PlayAttackAnimation(IBattler target)
     {
         _currentTarget = target;
         StartCoroutine(AttackDashRoutine(target));
+        if (_sfx != null) _sfx.PlayDashSFX();
     }
 
     public override void PlaySkillAnimation(IBattler target, SkillData skill)
@@ -34,6 +37,7 @@ public class BobBattleController : BasePartyMemberController
             targetPos.y = transform.position.y;
             transform.LookAt(targetPos);
             _bobAnimator.SetTrigger("isCastingHeal");
+            if (_sfx != null) _sfx.PlaySpellCastSfx();
         }
         else 
         {
@@ -52,17 +56,20 @@ public class BobBattleController : BasePartyMemberController
                 {
                     _currentTarget.TakeHealing(_currentSkill.Amount);
                     PlaySkillFeedback(_currentTarget, _currentSkill, false);
+                    if (_sfx != null) _sfx.PlayHealSFX();
                 }
                 else
                 {
                     _currentTarget.TakeDamage(_currentSkill.Amount);
                     PlaySkillFeedback(_currentTarget, _currentSkill, true);
+                    if (_sfx != null) _sfx.PlayHitSFX();
                 }
             }
             else if (_currentSkill.Effect == EffectType.Damage)
             {
                 _currentTarget.TakeDamage(_currentSkill.Amount);
                 PlaySkillFeedback(_currentTarget, _currentSkill, true);
+                if (_sfx != null) _sfx.PlayHitSFX();
             }
         }
     }
@@ -92,7 +99,7 @@ public class BobBattleController : BasePartyMemberController
     }
 
     private IEnumerator AttackDashRoutine(IBattler target)
-    {
+    {        
         Vector3 targetPos = ((MonoBehaviour)target).transform.position;
         Vector3 attackPos = targetPos + (_startPosition - targetPos).normalized * 1.5f;
         transform.LookAt(attackPos);
@@ -133,6 +140,7 @@ public class BobBattleController : BasePartyMemberController
         { 
             _currentTarget.TakeDamage(_attackDamage);
             PlayHitFeedback();
+            if (_sfx != null) _sfx.PlayHitSFX();
         }
     }
 

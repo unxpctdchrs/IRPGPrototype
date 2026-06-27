@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour, IInitializable
     private AudioSource musicSource;
     private List<AudioSource> ambienceSources;
     private int maxAmbienceLayers = 3;
+    private Coroutine _ambienceCrossfadeRoutine;
 
     public void Initialize()
     {
@@ -71,9 +72,13 @@ public class AudioManager : MonoBehaviour, IInitializable
     public void PlaySFX(AudioResource container, float volume = 1f)
     {
         AudioSource source = GetAvailableSource();
+        Debug.Log($"Playing {container.name} on source {source.name}. Is playing: {source.isPlaying}, Volume: {volume}");
         source.spatialBlend = 0f; 
+        source.reverbZoneMix = 1f;
+        source.bypassEffects = false;
         source.resource = container;
         source.volume = volume;
+        source.pitch = 1f;
         source.Play();
     }
 
@@ -157,6 +162,88 @@ public class AudioManager : MonoBehaviour, IInitializable
                 source.Stop();
                 source.resource = null;
                 return;
+            }
+        }
+    }
+
+    public void CrossfadeSceneAmbience(AudioResource newAmbience, float fadeDuration = 2.0f)
+    {
+        if (newAmbience == null) return;
+        if (_ambienceCrossfadeRoutine != null)
+        {
+            StopCoroutine(_ambienceCrossfadeRoutine);
+        }
+        _ambienceCrossfadeRoutine = StartCoroutine(CrossfadeAmbienceRoutine(newAmbience, fadeDuration));
+    }
+
+    private System.Collections.IEnumerator CrossfadeAmbienceRoutine(AudioResource newAmbience, float duration)
+    {
+        AudioSource targetSource = null;
+        Dictionary<AudioSource, float> startVolumes = new Dictionary<AudioSource, float>();
+
+        foreach (var source in ambienceSources)
+        {
+            if (source.isPlaying) startVolumes[source] = source.volume;
+            if (source.resource == newAmbience)
+            {
+                targetSource = source;
+            }
+        }
+
+        if (targetSource == null)
+        {
+            foreach (var source in ambienceSources)
+            {
+                if (!source.isPlaying)
+                {
+                    targetSource = source;
+                    targetSource.resource = newAmbience;
+                    targetSource.volume = 0f;
+                    targetSource.Play();
+                    break;
+                }
+            }
+        }
+
+        if (targetSource == null)
+        {
+            Debug.LogWarning("[AudioManager] All ambience channels full! Cannot crossfade.");
+            yield break;
+        }
+
+        if (!startVolumes.ContainsKey(targetSource)) startVolumes[targetSource] = targetSource.volume;
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float percent = timer / duration;
+
+            foreach (var source in ambienceSources)
+            {
+                if (source == targetSource)
+                {
+                    source.volume = Mathf.Lerp(startVolumes[source], 1f, percent);
+                }
+                else if (source.isPlaying)
+                {
+                    source.volume = Mathf.Lerp(startVolumes[source], 0f, percent);
+                }
+            }
+            yield return null;
+        }
+
+        foreach (var source in ambienceSources)
+        {
+            if (source == targetSource)
+            {
+                source.volume = 1f;
+            }
+            else if (source.isPlaying)
+            {
+                source.volume = 0f;
+                source.Stop();
+                source.resource = null;
             }
         }
     }

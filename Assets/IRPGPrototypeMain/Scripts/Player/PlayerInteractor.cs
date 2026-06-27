@@ -6,6 +6,7 @@ using Zenject;
 public class PlayerInteractor : MonoBehaviour
 {
     public bool IsInteracting => _interactableStored != null;
+    [SerializeField] private bool _enableInteraction = false;
 
     [Header("UI")]
     [SerializeField] private GameObject _interactUI;
@@ -56,7 +57,7 @@ public class PlayerInteractor : MonoBehaviour
 
     void Update()
     {
-        if (!IsInteracting)
+        if (!IsInteracting && _enableInteraction)
         {
             CheckForInteractableObject();
         }
@@ -64,6 +65,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private void CheckForInteractableObject()
     {
+        _interactUI.SetActive(false);
         Vector3 playerCenter = transform.position;
 
         int numFound = Physics.OverlapSphereNonAlloc(playerCenter, _sphereRadius, _resultBuffer);
@@ -92,6 +94,11 @@ public class PlayerInteractor : MonoBehaviour
         {
             _interactUI.SetActive(true);
             _interactUI.transform.position = _lookedAtInteractable.GetInteractableUIPosition();
+            
+            if (_interactUITmp != null) 
+            {
+                _interactUITmp.text = _lookedAtInteractable.GetInteractText();
+            }
         }
         else
         {
@@ -124,4 +131,9 @@ public class PlayerInteractor : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _sphereRadius);
     }
 
+    public void EnableInteraction(bool state)
+    {
+        _enableInteraction = state;
+        _interactUI.SetActive(state);
+    }
 }

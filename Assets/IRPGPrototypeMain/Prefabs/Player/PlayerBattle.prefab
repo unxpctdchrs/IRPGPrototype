@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 8534751975413851400}
   - component: {fileID: 7064683142819740854}
   - component: {fileID: 3555139916072325992}
+  - component: {fileID: 1750516996453478149}
   m_Layer: 0
   m_Name: PlayerBattle
   m_TagString: Untagged
@@ -512,9 +513,14 @@ MonoBehaviour:
   _impulseSource: {fileID: 3555139916072325992}
   _attackVFX: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
   _vfxOffset: {x: 0, y: 1, z: 0}
+  _maxHP: 100
+  _healthBar: {fileID: 0}
+  _deathVFX: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  _deathSFX: {fileID: 8300000, guid: ac54b04a495934d70b6f15435d02d2d8, type: 3}
+  _vfxLifetime: 2
   CharacterName: 
   MaxHP: 0
-  CurrentHP: 0
+  _battleUIManager: {fileID: 0}
   _dashTime: 0.4
   _dashCurve:
     serializedVersion: 2
@@ -549,7 +555,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _battleUIManager: {fileID: 0}
   _mcAnimator: {fileID: 0}
 --- !u!114 &3555139916072325992
 MonoBehaviour:
@@ -604,6 +609,20 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1750516996453478149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669396839083417964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32606fdc908954949b2c1c5af438392e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleMCSFX
+  _dashSFX: {fileID: 8300000, guid: 1dfc3ff371f444212b386405f872bbe8, type: 3}
+  _attackHitSFX: {fileID: 8300000, guid: b23cf3542cd154c948141c76172025d7, type: 3}
 --- !u!1 &2723696453220856467
 GameObject:
   m_ObjectHideFlags: 0

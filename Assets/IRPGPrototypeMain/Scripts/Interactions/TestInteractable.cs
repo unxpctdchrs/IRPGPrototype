@@ -7,6 +7,11 @@ public class TestInteractable : MonoBehaviour, IInteractable
         return transform.position + Vector3.up * 1.5f;
     }
 
+    public string GetInteractText()
+    {
+        return "Test";
+    }
+
     public void OnInteractStart()
     {
         Debug.Log("[TestInteractable] its working");
