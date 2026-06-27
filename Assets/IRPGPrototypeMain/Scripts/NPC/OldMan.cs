@@ -49,6 +49,6 @@ public class OldMan : MonoBehaviour, IInteractable
 
     public void LoadThankYouScene()
     {
-        _sceneService.LoadScene(SceneType.ThankYou);
+        _sceneService.LoadSceneAdditive(SceneType.ThankYou);
     }
 }

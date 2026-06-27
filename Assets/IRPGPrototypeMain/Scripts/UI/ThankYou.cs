@@ -6,20 +6,19 @@ public class ThankYou : MonoBehaviour
 {
     [SerializeField] private Button _resumeButton;
 
-    private InputManager _inputManager;
     private ISceneService _sceneService;
+    private InputManager _inputManager;
 
     [Inject]
-    public void Construct(InputManager inputManager, ISceneService sceneService)
+    public void Construct(ISceneService sceneService, InputManager inputManager)
     {
-        _inputManager = inputManager;
         _sceneService = sceneService;
+        _inputManager = inputManager;
     }
 
     void Start()
     {
         if (_resumeButton != null) _resumeButton.onClick.AddListener(OnResumeButtonClicked);
-
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -30,7 +29,7 @@ public class ThankYou : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        
         if (_inputManager != null)
         {
             _inputManager.EnablePlayerControls();
@@ -38,7 +37,7 @@ public class ThankYou : MonoBehaviour
 
         if (_sceneService != null)
         {
-            _sceneService.UnloadScene(SceneType.PauseMenu); 
+            _sceneService.UnloadScene(SceneType.ThankYou); 
         }
     }
 }
